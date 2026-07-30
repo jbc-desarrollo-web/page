@@ -1,0 +1,1941 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JBC — Landing pages y sitios web que convierten visitas en clientes</title>
+  <meta name="description"
+    content="Diseñamos y desarrollamos landing pages y sitios web enfocados en convertir visitantes en oportunidades de negocio. Desarrollo, rediseño, mantenimiento y soporte.">
+  <meta name="theme-color" content="#15161c">
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%234f7cf6'/%3E%3Cpath d='M9 22 16 8l7 14' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ============ Design tokens (matches supplied style reference) ============ */
+    :root {
+      color-scheme: dark;
+      --background: oklch(0.16 0.012 264);
+      --foreground: oklch(0.97 0.005 260);
+      --card: oklch(0.20 0.014 264);
+      --card-foreground: oklch(0.97 0.005 260);
+      --primary: oklch(0.62 0.2 258);
+      --primary-foreground: oklch(0.98 0.01 260);
+      --secondary: oklch(0.24 0.014 264);
+      --muted-foreground: oklch(0.72 0.015 262);
+      --border: oklch(1 0 0 / 10%);
+      --input: oklch(1 0 0 / 14%);
+      --ring: oklch(0.62 0.2 258);
+      --radius: 0.85rem;
+      --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+      --font-heading: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 6rem;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--foreground);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: var(--font-heading);
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .container {
+      max-width: 72rem;
+      margin-inline: auto;
+      padding-inline: 1.25rem;
+    }
+
+    /* skip link */
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: -4rem;
+      background: var(--primary);
+      color: var(--primary-foreground);
+      padding: .6rem 1rem;
+      border-radius: .5rem;
+      z-index: 100;
+      transition: top .2s ease;
+    }
+
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--ring);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    /* glass surface, shared across cards/nav/panels */
+    .glass {
+      background: color-mix(in oklch, var(--card) 55%, transparent);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+    }
+
+    /* ============ scroll reveal ============ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s cubic-bezier(.22, 1, .36, 1), transform .7s cubic-bezier(.22, 1, .36, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+
+      html {
+        scroll-behavior: auto;
+      }
+    }
+
+    /* ============ buttons ============ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      height: 3rem;
+      padding-inline: 1.75rem;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: background-color .2s ease, transform .15s ease, box-shadow .2s ease;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: var(--primary-foreground);
+    }
+
+    .btn-primary:hover {
+      background: color-mix(in oklch, var(--primary) 88%, white);
+    }
+
+    .btn-outline {
+      background: color-mix(in oklch, var(--secondary) 40%, transparent);
+      border: 1px solid var(--border);
+      color: var(--foreground);
+    }
+
+    .btn-outline:hover {
+      background: var(--secondary);
+    }
+
+    .btn svg {
+      width: 1rem;
+      height: 1rem;
+      transition: transform .2s ease;
+    }
+
+    .btn:hover svg.arrow {
+      transform: translateX(3px);
+    }
+
+    /* ============ nav ============ */
+    .site-header {
+      position: fixed;
+      inset-inline: 0;
+      top: 0;
+      z-index: 50;
+      padding-block: 1rem;
+      transition: padding .3s ease;
+    }
+
+    .site-header.scrolled {
+      padding-block: .5rem;
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .75rem 1rem;
+      border-radius: 1rem;
+      transition: all .3s ease;
+    }
+
+    .site-header.scrolled .site-nav {
+      background: color-mix(in oklch, var(--card) 55%, transparent);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px -10px rgb(0 0 0 / .5);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-family: var(--font-heading);
+      font-size: 1.125rem;
+      font-weight: 700;
+    }
+
+    .brand-mark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.1rem;
+      height: 2.1rem;
+      border-radius: .6rem;
+      background: color-mix(in oklch, var(--primary) 15%, transparent);
+      color: var(--primary);
+      box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--primary) 30%, transparent);
+    }
+
+    .brand-mark svg {
+      width: 1.05rem;
+      height: 1.05rem;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      font-size: .9rem;
+      color: var(--muted-foreground);
+      transition: color .2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--foreground);
+    }
+
+    .nav-cta {
+      display: none;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: .5rem;
+    }
+
+    .nav-toggle svg {
+      width: 1.35rem;
+      height: 1.35rem;
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: .25rem;
+      margin-top: .5rem;
+      border-radius: 1rem;
+      padding: .75rem;
+      background: color-mix(in oklch, var(--card) 55%, transparent);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      display: block;
+      padding: .65rem .75rem;
+      border-radius: .6rem;
+      font-size: .9rem;
+      color: var(--muted-foreground);
+    }
+
+    .mobile-menu a:hover {
+      background: var(--secondary);
+      color: var(--foreground);
+    }
+
+    .mobile-menu .btn {
+      margin-top: .4rem;
+      width: 100%;
+      color: var(--primary-foreground);
+    }
+
+    @media (min-width:768px) {
+      .nav-links {
+        display: flex;
+      }
+
+      .nav-cta {
+        display: flex;
+      }
+
+      .nav-toggle {
+        display: none;
+      }
+
+      .mobile-menu {
+        display: none !important;
+      }
+    }
+
+    /* ============ hero ============ */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 8rem 0 4rem;
+    }
+
+    .hero-glow {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .hero-glow span {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(120px);
+    }
+
+    .hero-glow .g1 {
+      width: 38rem;
+      height: 38rem;
+      left: 50%;
+      top: -10rem;
+      transform: translateX(-50%);
+      background: color-mix(in oklch, var(--primary) 20%, transparent);
+    }
+
+    .hero-glow .g2 {
+      width: 26rem;
+      height: 26rem;
+      right: -8rem;
+      top: 30%;
+      background: color-mix(in oklch, var(--primary) 10%, transparent);
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      border: 1px solid var(--border);
+      background: color-mix(in oklch, var(--secondary) 50%, transparent);
+      padding: .35rem .8rem;
+      border-radius: 999px;
+      font-size: .75rem;
+      font-weight: 600;
+      color: var(--muted-foreground);
+    }
+
+    .eyebrow .dot {
+      width: .4rem;
+      height: .4rem;
+      border-radius: 999px;
+      background: var(--primary);
+    }
+
+    .hero h1 {
+      font-size: 2.25rem;
+      font-weight: 600;
+      line-height: 1.08;
+      margin-top: 1.5rem;
+    }
+
+    .hero h1 .accent {
+      color: var(--primary);
+    }
+
+    .hero p.lede {
+      margin-top: 1.5rem;
+      max-width: 34rem;
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: var(--muted-foreground);
+    }
+
+    .hero-actions {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+
+    .hero-visual {
+      position: relative;
+    }
+
+    .browser-card {
+      border-radius: 1.5rem;
+      padding: .5rem;
+      box-shadow: 0 25px 60px -20px color-mix(in oklch, var(--primary) 25%, transparent);
+    }
+
+    .browser-window {
+      border-radius: 1.1rem;
+      overflow: hidden;
+      background: var(--card);
+      border: 1px solid var(--border);
+    }
+
+    .browser-bar {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .65rem .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .browser-bar span {
+      width: .55rem;
+      height: .55rem;
+      border-radius: 999px;
+      background: var(--secondary);
+    }
+
+    .browser-bar .addr {
+      margin-left: .6rem;
+      flex: 1;
+      height: 1.25rem;
+      border-radius: 999px;
+      background: var(--secondary);
+    }
+
+    @media (min-width:1024px) {
+      .hero-grid {
+        grid-template-columns: 1.05fr 1fr;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+      }
+
+      .hero-actions {
+        flex-direction: row;
+      }
+    }
+
+    /* ============ sections generic ============ */
+    section {
+      padding: 4.5rem 0;
+    }
+
+    .section-head {
+      max-width: 40rem;
+    }
+
+    .section-head.center {
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    .section-head h2 {
+      font-size: 1.85rem;
+      font-weight: 600;
+    }
+
+    .section-head p {
+      margin-top: 1rem;
+      color: var(--muted-foreground);
+      line-height: 1.65;
+    }
+
+    .kicker {
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    @media (min-width:768px) {
+      .section-head h2 {
+        font-size: 2.35rem;
+      }
+    }
+
+    /* ============ problem section ============ */
+    .problem-list {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .problem-item {
+      display: flex;
+      gap: .9rem;
+      align-items: flex-start;
+      border-radius: 1rem;
+      padding: 1.1rem 1.3rem;
+    }
+
+    .problem-item .ico {
+      flex: none;
+      width: 2.1rem;
+      height: 2.1rem;
+      border-radius: .6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: color-mix(in oklch, oklch(0.62 0.22 25) 15%, transparent);
+      color: oklch(0.72 0.18 25);
+    }
+
+    .problem-item .ico svg {
+      width: 1.05rem;
+      height: 1.05rem;
+    }
+
+    .problem-item p {
+      color: var(--muted-foreground);
+      line-height: 1.6;
+    }
+
+    .problem-note {
+      margin-top: 2rem;
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: var(--foreground);
+      border-left: 2px solid var(--primary);
+      padding-left: 1.1rem;
+    }
+
+    /* ============ cards grid ============ */
+    .cards-grid {
+      margin-top: 3rem;
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    @media (min-width:768px) {
+      .cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .card {
+      border-radius: 1.25rem;
+      padding: 2rem;
+      transition: transform .3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card .ico {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 3rem;
+      height: 3rem;
+      border-radius: .85rem;
+      background: color-mix(in oklch, var(--primary) 15%, transparent);
+      color: var(--primary);
+      box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--primary) 30%, transparent);
+    }
+
+    .card .ico svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    .card h3 {
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .card p {
+      margin-top: .75rem;
+      color: var(--muted-foreground);
+      line-height: 1.6;
+    }
+
+    /* ============ process ============ */
+    .process-grid {
+      position: relative;
+      margin-top: 3.5rem;
+      display: grid;
+      gap: 2.5rem;
+    }
+
+    .process-line {
+      display: none;
+    }
+
+    @media (min-width:768px) {
+      .process-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .process-line {
+        display: block;
+        position: absolute;
+        top: 1.75rem;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(to right, transparent, var(--border), transparent);
+      }
+    }
+
+    .process-step {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .process-step .num {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 1rem;
+      background: var(--primary);
+      color: var(--primary-foreground);
+      box-shadow: 0 10px 25px -6px color-mix(in oklch, var(--primary) 55%, transparent);
+    }
+
+    .process-step .num svg {
+      width: 1.4rem;
+      height: 1.4rem;
+    }
+
+    .process-step .step-index {
+      margin-top: 1.25rem;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: .85rem;
+      color: var(--primary);
+    }
+
+    .process-step h3 {
+      margin-top: .4rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .process-step p {
+      margin-top: .6rem;
+      max-width: 18rem;
+      color: var(--muted-foreground);
+      line-height: 1.6;
+    }
+
+    /* ============ testimonials ============ */
+    .testi-grid {
+      margin-top: 3rem;
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .testi-hint {
+      margin-top: 1.5rem;
+      text-align: center;
+      font-size: .85rem;
+      color: var(--muted-foreground);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .4rem;
+    }
+
+    @media (min-width:768px) {
+      .testi-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .testi-card {
+      border-radius: 1.25rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+      transition: transform .25s ease, border-color .25s ease;
+    }
+
+    .testi-card:hover,
+    .testi-card:focus-within {
+      transform: translateY(-4px);
+      border-color: color-mix(in oklch, var(--primary) 45%, var(--border));
+    }
+
+    .card-link {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      border-radius: inherit;
+    }
+
+    .card-link:focus-visible {
+      outline: 2px solid var(--ring);
+      outline-offset: 3px;
+      border-radius: inherit;
+    }
+
+
+    .stars {
+      display: flex;
+      gap: .2rem;
+      color: var(--primary);
+    }
+
+    .stars svg {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    blockquote {
+      margin: 1.25rem 0 0;
+      flex: 1;
+      line-height: 1.65;
+      color: color-mix(in oklch, var(--foreground) 92%, transparent);
+    }
+
+    .testi-foot {
+      margin-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+
+    .avatar {
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 999px;
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: color-mix(in oklch, var(--primary) 22%, var(--secondary));
+      color: var(--foreground);
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: .85rem;
+      ring: 1px solid var(--border);
+    }
+
+    .testi-name {
+      font-size: .9rem;
+      font-weight: 600;
+    }
+
+    .testi-role {
+      font-size: .85rem;
+      color: var(--muted-foreground);
+    }
+
+    /* ============ FAQ ============ */
+    .faq-list {
+      margin-top: 3rem;
+      max-width: 44rem;
+      margin-inline: auto;
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+
+    .faq-item {
+      border-radius: 1.25rem;
+      overflow: hidden;
+    }
+
+    .faq-q {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.15rem 1.4rem;
+      text-align: left;
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .faq-q .plus {
+      flex: none;
+      width: 1.25rem;
+      height: 1.25rem;
+      color: var(--primary);
+      transition: transform .3s ease;
+    }
+
+    .faq-item[aria-expanded="true"] .plus {
+      transform: rotate(45deg);
+    }
+
+    .faq-a {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows .3s ease, opacity .3s ease;
+      opacity: 0;
+    }
+
+    .faq-item[aria-expanded="true"] .faq-a {
+      grid-template-rows: 1fr;
+      opacity: 1;
+    }
+
+    .faq-a-inner {
+      overflow: hidden;
+    }
+
+    .faq-a p {
+      padding: 0 1.4rem 1.25rem;
+      color: var(--muted-foreground);
+      line-height: 1.6;
+    }
+
+    /* ============ final CTA ============ */
+    .final-cta-panel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1.75rem;
+      padding: 3.5rem 1.5rem;
+      text-align: center;
+    }
+
+    .final-cta-panel .glow {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+    }
+
+    .final-cta-panel .glow span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 34rem;
+      height: 34rem;
+      transform: translate(-50%, -50%);
+      border-radius: 999px;
+      background: color-mix(in oklch, var(--primary) 20%, transparent);
+      filter: blur(120px);
+    }
+
+    .final-cta-panel h2 {
+      font-size: 1.85rem;
+      font-weight: 600;
+      max-width: 34rem;
+      margin-inline: auto;
+    }
+
+    .final-cta-panel p {
+      margin-top: 1.1rem;
+      max-width: 32rem;
+      margin-inline: auto;
+      color: var(--muted-foreground);
+      font-size: 1.05rem;
+      line-height: 1.65;
+    }
+
+    .final-cta-actions {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .75rem;
+    }
+
+    .final-cta-actions .btn {
+      white-space: normal;
+      text-align: center;
+      max-width: 100%;
+      line-height: 1.3;
+    }
+
+    @media (max-width:400px) {
+      .final-cta-actions .btn {
+        height: auto;
+        padding-block: .85rem;
+      }
+    }
+
+    @media (min-width:768px) {
+      .final-cta-panel {
+        padding: 5rem 3rem;
+      }
+
+      .final-cta-panel h2 {
+        font-size: 2.75rem;
+      }
+    }
+
+    /* ============ contact form ============ */
+    .contact-wrap {
+      margin-top: 3rem;
+      display: grid;
+      gap: 2rem;
+      max-width: 44rem;
+      margin-inline: auto;
+    }
+
+    .form-card {
+      border-radius: 1.5rem;
+      padding: 2rem;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .field label {
+      font-size: .85rem;
+      font-weight: 600;
+    }
+
+    .field input,
+    .field textarea {
+      background: color-mix(in oklch, var(--secondary) 60%, transparent);
+      border: 1px solid var(--input);
+      border-radius: .7rem;
+      padding: .75rem .9rem;
+      color: var(--foreground);
+      font: inherit;
+      resize: vertical;
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      border-color: var(--ring);
+    }
+
+    .form-note {
+      margin-top: .25rem;
+      font-size: .8rem;
+      color: var(--muted-foreground);
+    }
+
+    .form-status {
+      margin-top: 1rem;
+      font-size: .9rem;
+    }
+
+    .form-status.ok {
+      color: oklch(0.75 0.16 150);
+    }
+
+    .form-status.err {
+      color: oklch(0.72 0.18 25);
+    }
+
+    @media (min-width:768px) {
+      .form-card {
+        padding: 2.5rem;
+      }
+    }
+
+
+
+    /* ============ footer ============ */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 0;
+    }
+
+    .footer-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      gap: 1.75rem;
+      font-size: .9rem;
+      color: var(--muted-foreground);
+    }
+
+    .footer-links a:hover {
+      color: var(--foreground);
+    }
+
+    .footer-copy {
+      font-size: .85rem;
+      color: var(--muted-foreground);
+    }
+
+    @media (min-width:768px) {
+      .footer-row {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+      }
+    }
+
+    body.is-loading {
+      overflow: hidden;
+    }
+
+    .page-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--background);
+      transition: opacity .6s ease, visibility .6s ease;
+    }
+
+    .page-loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loader-glow {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .loader-glow span {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(120px);
+      background: color-mix(in oklch, var(--primary) 22%, transparent);
+    }
+
+    .loader-glow span:nth-child(1) {
+      width: 30rem;
+      height: 30rem;
+      top: -8rem;
+      left: -6rem;
+      animation: loaderFloat 6s ease-in-out infinite;
+    }
+
+    .loader-glow span:nth-child(2) {
+      width: 24rem;
+      height: 24rem;
+      bottom: -8rem;
+      right: -6rem;
+      animation: loaderFloat 7s ease-in-out infinite reverse;
+    }
+
+    @keyframes loaderFloat {
+
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
+
+      50% {
+        transform: translate(2rem, -1.5rem);
+      }
+    }
+
+    .loader-content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .loader-mark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 4rem;
+      height: 4rem;
+      border-radius: 1rem;
+      background: color-mix(in oklch, var(--primary) 15%, transparent);
+      color: var(--primary);
+      box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--primary) 35%, transparent);
+      animation: loaderPulse 1.6s ease-in-out infinite;
+    }
+
+    .loader-mark svg {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    @keyframes loaderPulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.08);
+      }
+    }
+
+    .loader-text {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      color: var(--foreground);
+      opacity: 0;
+      animation: loaderFadeUp .6s ease forwards .3s;
+    }
+
+    @keyframes loaderFadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .loader-bar {
+      width: 10rem;
+      height: 3px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: var(--secondary);
+    }
+
+    .loader-bar span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      background: var(--primary);
+      animation: loaderProgress 1.8s cubic-bezier(.4, 0, .2, 1) forwards .2s;
+    }
+
+    @keyframes loaderProgress {
+      to {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .loader-mark,
+      .loader-glow span,
+      .loader-bar span {
+        animation: none;
+      }
+
+      .loader-text {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="pageLoader" class="page-loader" aria-hidden="true">
+    <div class="loader-glow"><span></span><span></span></div>
+    <div class="loader-content">
+      <div class="loader-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M4 20 12 4l8 16" />
+        </svg>
+      </div>
+      <p class="loader-text">JBC</p>
+      <div class="loader-bar"><span></span></div>
+    </div>
+  </div>
+  <noscript>
+    <style>
+      .page-loader {
+        display: none;
+      }
+    </style>
+  </noscript>
+
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container">
+      <nav class="site-nav" aria-label="Navegación principal">
+        <a href="#top" class="brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M4 20 12 4l8 16" />
+            </svg>
+          </span>
+          JBC
+        </a>
+
+        <div class="nav-links">
+          <a href="#solucion">Soluciones</a>
+          <a href="#proceso">Cómo trabajamos</a>
+          <a href="#testimonios">Testimonios</a>
+          <a href="#faq">FAQ</a>
+        </div>
+
+        <div class="nav-cta">
+          <a href="#contacto" class="btn btn-primary">Solicitar consulta</a>
+        </div>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false"
+          aria-controls="mobileMenu">
+          <svg id="iconMenu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round">
+            <line x1="4" y1="7" x2="20" y2="7" />
+            <line x1="4" y1="12" x2="20" y2="12" />
+            <line x1="4" y1="17" x2="20" y2="17" />
+          </svg>
+          <svg id="iconClose" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" style="display:none">
+            <line x1="6" y1="6" x2="18" y2="18" />
+            <line x1="18" y1="6" x2="6" y2="18" />
+          </svg>
+        </button>
+      </nav>
+
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#solucion">Soluciones</a>
+        <a href="#proceso">Cómo trabajamos</a>
+        <a href="#testimonios">Testimonios</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contacto" class="btn btn-primary">Solicitar consulta</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top">
+      <div class="hero-glow" aria-hidden="true"><span class="g1"></span><span class="g2"></span></div>
+      <div class="container hero-grid">
+        <div>
+          <div class="reveal">
+            <span class="eyebrow"><span class="dot" aria-hidden="true"></span>Diseño &amp; Desarrollo Web</span>
+          </div>
+          <h1 class="reveal" style="transition-delay:80ms">
+            Tu sitio web debe generar <span class="accent">clientes</span>, no solo visitas.
+          </h1>
+          <p class="lede reveal" style="transition-delay:160ms">
+            Diseñamos landing pages y soluciones web enfocadas en convertir visitantes en oportunidades de negocio.
+            Desarrollo, rediseño, mantenimiento y soporte para empresas y marcas personales que buscan una presencia
+            digital profesional y efectiva.
+          </p>
+          <div class="hero-actions reveal" style="transition-delay:240ms">
+            <a href="#contacto" class="btn btn-primary">
+              Solicitar una consulta
+              <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </a>
+            <a href="#proceso" class="btn btn-outline">Ver cómo trabajamos</a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal" style="transition-delay:200ms">
+          <div class="glass browser-card">
+            <div class="browser-window">
+              <div class="browser-bar" aria-hidden="true">
+                <span></span><span></span><span></span>
+                <div class="addr"></div>
+              </div>
+              <svg viewBox="0 0 560 400" role="img"
+                aria-label="Vista previa de una landing page moderna con secciones de encabezado, contenido y botón de acción">
+                <rect width="560" height="400" fill="none" />
+                <rect x="24" y="24" width="180" height="16" rx="4" fill="var(--secondary)" />
+                <rect x="24" y="60" width="320" height="28" rx="6"
+                  fill="color-mix(in oklch, var(--foreground) 85%, transparent)" />
+                <rect x="24" y="98" width="260" height="12" rx="3" fill="var(--muted-foreground)" opacity="0.6" />
+                <rect x="24" y="118" width="200" height="12" rx="3" fill="var(--muted-foreground)" opacity="0.6" />
+                <rect x="24" y="148" width="140" height="36" rx="999" fill="var(--primary)" />
+                <rect x="320" y="40" width="216" height="160" rx="14" fill="var(--secondary)" />
+                <rect x="24" y="220" width="150" height="120" rx="12" fill="var(--card)" stroke="var(--border)" />
+                <rect x="190" y="220" width="150" height="120" rx="12" fill="var(--card)" stroke="var(--border)" />
+                <rect x="356" y="220" width="180" height="120" rx="12" fill="var(--card)" stroke="var(--border)" />
+                <rect x="40" y="240" width="30" height="30" rx="8"
+                  fill="color-mix(in oklch, var(--primary) 20%, transparent)" />
+                <rect x="206" y="240" width="30" height="30" rx="8"
+                  fill="color-mix(in oklch, var(--primary) 20%, transparent)" />
+                <rect x="372" y="240" width="30" height="30" rx="8"
+                  fill="color-mix(in oklch, var(--primary) 20%, transparent)" />
+                <rect x="40" y="284" width="110" height="9" rx="2" fill="var(--muted-foreground)" opacity="0.5" />
+                <rect x="206" y="284" width="110" height="9" rx="2" fill="var(--muted-foreground)" opacity="0.5" />
+                <rect x="372" y="284" width="140" height="9" rx="2" fill="var(--muted-foreground)" opacity="0.5" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROBLEM ============ -->
+    <section id="problema" aria-labelledby="problema-h">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 id="problema-h">¿Tu sitio web realmente está trabajando para vos?</h2>
+          <p>Muchas empresas invierten en tener una página web, pero pocas consiguen resultados reales.</p>
+        </div>
+
+        <div class="problem-list">
+          <div class="glass problem-item reveal">
+            <span class="ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9" />
+                <line x1="12" y1="8" x2="12" y2="13" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
+            </span>
+            <p>Tu sitio recibe visitas, pero casi nadie se comunica o solicita información.</p>
+          </div>
+          <div class="glass problem-item reveal" style="transition-delay:80ms">
+            <span class="ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9" />
+                <line x1="12" y1="8" x2="12" y2="13" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
+            </span>
+            <p>La web luce desactualizada, carga lento o no transmite confianza.</p>
+          </div>
+          <div class="glass problem-item reveal" style="transition-delay:160ms">
+            <span class="ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9" />
+                <line x1="12" y1="8" x2="12" y2="13" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
+            </span>
+            <p>Cada cambio depende de terceros y el mantenimiento se vuelve un problema constante.</p>
+          </div>
+        </div>
+
+        <p class="problem-note reveal">Una página web debe ser una herramienta comercial que acompañe el crecimiento de
+          tu negocio, no un gasto que simplemente existe.</p>
+      </div>
+    </section>
+
+    <!-- ============ SOLUTION ============ -->
+    <section id="solucion" aria-labelledby="solucion-h">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="kicker">La solución</span>
+          <h2 id="solucion-h" style="margin-top:.5rem">Landing pages orientadas a conversiones</h2>
+          <p>Cada sección está diseñada para guiar al visitante hacia una acción concreta.</p>
+        </div>
+
+        <div class="cards-grid">
+          <article class="glass card reveal">
+            <span class="ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="13.5" cy="6.5" r=".5" fill="currentColor" />
+                <circle cx="17.5" cy="10.5" r=".5" fill="currentColor" />
+                <circle cx="8.5" cy="7.5" r=".5" fill="currentColor" />
+                <circle cx="6.5" cy="12.5" r=".5" fill="currentColor" />
+                <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-4-4 3 3 0 0 1-3-3 4 4 0 0 1-3-3" />
+              </svg>
+            </span>
+            <h3>Diseño profesional</h3>
+            <p>Una imagen moderna y coherente con tu marca para generar confianza desde el primer segundo.</p>
+          </article>
+
+          <article class="glass card reveal" style="transition-delay:100ms">
+            <span class="ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6" />
+                <polyline points="8 6 2 12 8 18" />
+              </svg>
+            </span>
+            <h3>Desarrollo a medida</h3>
+            <p>Creamos soluciones adaptadas a tus necesidades, sin plantillas limitantes ni funcionalidades
+              innecesarias.</p>
+          </article>
+
+          <article class="glass card reveal" style="transition-delay:200ms">
+            <span class="ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
+                <polyline points="9 12 11 14 15 10" />
+              </svg>
+            </span>
+            <h3>Mantenimiento y actualizaciones</h3>
+            <p>Nos ocupamos de mantener tu sitio seguro, actualizado y funcionando correctamente para que vos puedas
+              enfocarte en tu negocio.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW WE WORK ============ -->
+    <section id="proceso" aria-labelledby="proceso-h">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="kicker">¿Cómo trabajamos?</span>
+          <h2 id="proceso-h" style="margin-top:.5rem">Un proceso claro, de principio a fin</h2>
+        </div>
+
+        <div class="process-grid">
+          <div class="process-line" aria-hidden="true"></div>
+
+          <div class="process-step reveal">
+            <div class="num" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="11" cy="11" r="7" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            </div>
+            <span class="step-index">01</span>
+            <h3>Analizamos tu proyecto</h3>
+            <p>Conocemos tu negocio, tus objetivos y el perfil de tus clientes.</p>
+          </div>
+
+          <div class="process-step reveal" style="transition-delay:120ms">
+            <div class="num" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M12 20h9" />
+                <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+              </svg>
+            </div>
+            <span class="step-index">02</span>
+            <h3>Diseñamos y desarrollamos</h3>
+            <p>Construimos una solución web personalizada, optimizada para todos los dispositivos.</p>
+          </div>
+
+          <div class="process-step reveal" style="transition-delay:240ms">
+            <div class="num" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+                <path
+                  d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+                <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+                <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+              </svg>
+            </div>
+            <span class="step-index">03</span>
+            <h3>Publicamos y acompañamos</h3>
+            <p>Ponemos tu sitio online y seguimos brindando soporte, mejoras y mantenimiento cuando lo necesites.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TESTIMONIALS ============ -->
+    <section id="testimonios" aria-labelledby="testimonios-h">
+      <div class="container">
+        <div class="section-head center reveal">
+          <h2 id="testimonios-h">Lo que dicen nuestros clientes</h2>
+        </div>
+        <p class="testi-hint reveal">Presioná una tarjeta para visitar la página web del cliente</p>
+
+        <div class="testi-grid">
+          <figure class="glass testi-card reveal">
+            <div class="stars" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
+              </svg>
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
+              </svg>
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
+              </svg>
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
+              </svg>
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
+              </svg>
+            </div>
+            <blockquote>"Necesitábamos una landing para mostrar nuestros servicios a los donadores. En pocos dias
+              empezamos a recaudar más fondos y el proceso fue claro desde el primer día."</blockquote>
+            <figcaption class="testi-foot">
+              <span class="avatar" aria-hidden="true">NC</span>
+              <div>
+                <div class="testi-name">Noara Sandoval</div>
+                <div class="testi-role">Colonia Michis</div>
+              </div>
+            </figcaption>
+            <a class="card-link" href="https://justin-baltasar.github.io/colonia-michis/" target="_blank"
+              rel="noopener noreferrer" aria-label="Visitar el sitio web de Colonia Michis"></a>
+          </figure>
+
+          <figure class="glass testi-card reveal">
+            <div class="stars" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
+              </svg>
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
+              </svg>
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
+              </svg>
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
+              </svg>
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
+              </svg>
+            </div>
+            <blockquote>"Precisaba una pagina para ofrecer mis servicios a los sponsors. Gracias a ella
+              mejore mi marca personal y pude maximizar mis precios."</blockquote>
+            <figcaption class="testi-foot">
+              <span class="avatar" aria-hidden="true">NC</span>
+              <div>
+                <div class="testi-name">Luis Picasso</div>
+                <div class="testi-role">LP slots</div>
+              </div>
+            </figcaption>
+            <a class="card-link" href="https://justin-baltasar.github.io/lp-slots/" target="_blank"
+              rel="noopener noreferrer" aria-label="Visitar el sitio web de LP slots"></a>
+          </figure>
+
+          <figure class="glass testi-card reveal" style="transition-delay:100ms">
+            <div class="stars" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
+              </svg>
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
+              </svg>
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
+              </svg>
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
+              </svg>
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
+              </svg>
+            </div>
+            <blockquote>"Crearon completamente nuestra primera página web. Ahora transmitimos una imagen mucho más
+              profesional y
+              atraemos mas clientes."</blockquote>
+            <figcaption class="testi-foot">
+              <span class="avatar" aria-hidden="true">TS</span>
+              <div>
+                <div class="testi-name">Tobias Sanchez</div>
+                <div class="testi-role">JIT Arquitectura</div>
+              </div>
+            </figcaption>
+            <a class="card-link" href="https://justin-baltasar.github.io/jit-arquitectura/" target="_blank"
+              rel="noopener noreferrer" aria-label="Visitar el sitio web de JIT Arquitectura"></a>
+          </figure>
+        </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section id="faq" aria-labelledby="faq-h">
+      <div class="container">
+        <div class="section-head center reveal">
+          <h2 id="faq-h">Preguntas frecuentes</h2>
+        </div>
+
+        <div class="faq-list reveal">
+          <div class="glass faq-item" aria-expanded="false">
+            <h3>
+              <button class="faq-q" type="button">
+                <span>¿Cuánto demora el desarrollo?</span>
+                <svg class="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round">
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+              </button>
+            </h3>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                <p>Depende del alcance del proyecto. Una landing page suele estar lista en pocos días, mientras que
+                  desarrollos más completos requieren un plazo mayor.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass faq-item" aria-expanded="false">
+            <h3>
+              <button class="faq-q" type="button">
+                <span>¿El sitio funciona en celulares y tablets?</span>
+                <svg class="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round">
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+              </button>
+            </h3>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                <p>Sí. Todos los proyectos se desarrollan con diseño adaptable para ofrecer una buena experiencia en
+                  cualquier dispositivo.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass faq-item" aria-expanded="false">
+            <h3>
+              <button class="faq-q" type="button">
+                <span>¿Pueden actualizar un sitio existente?</span>
+                <svg class="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round">
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+              </button>
+            </h3>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                <p>Sí. Realizamos mejoras, rediseños, optimización de rendimiento y mantenimiento sobre sitios ya
+                  publicados.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass faq-item" aria-expanded="false">
+            <h3>
+              <button class="faq-q" type="button">
+                <span>¿Incluyen mantenimiento después de la entrega?</span>
+                <svg class="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round">
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+              </button>
+            </h3>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                <p>Ofrecemos planes de mantenimiento y soporte para mantener el sitio actualizado, seguro y funcionando
+                  correctamente.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass faq-item" aria-expanded="false">
+            <h3>
+              <button class="faq-q" type="button">
+                <span>¿Trabajan con empresas y profesionales independientes?</span>
+                <svg class="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round">
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+              </button>
+            </h3>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                <p>Sí. Desarrollamos soluciones tanto para pequeñas y medianas empresas como para marcas personales y
+                  profesionales que buscan fortalecer su presencia digital.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CTA ============ -->
+    <section id="final-cta">
+      <div class="container">
+        <div class="glass final-cta-panel reveal">
+          <div class="glow" aria-hidden="true"><span></span></div>
+          <h2>Tu próximo cliente puede estar buscando tus servicios ahora mismo.</h2>
+          <p>Cada día sin una presencia digital profesional es una oportunidad que puede terminar en la competencia.
+            Solicitá una consulta y conversemos sobre la mejor solución para tu proyecto. Sin compromiso.</p>
+          <div class="final-cta-actions">
+            <a href="#contacto" class="btn btn-primary">
+              Quiero impulsar mi presencia digital
+              <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section id="contacto" aria-labelledby="contacto-h">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="kicker">Contacto</span>
+          <h2 id="contacto-h" style="margin-top:.5rem">Solicitá tu consulta gratuita</h2>
+          <p>Contanos brevemente sobre tu proyecto y te respondemos a la brevedad, sin compromiso.</p>
+        </div>
+
+        <div class="contact-wrap">
+          <form class="glass form-card reveal" id="contactForm" action="https://formspree.io/f/maqrzekp" method="POST"
+            novalidate>
+            <div class="field">
+              <label for="name">Nombre completo</label>
+              <input type="text" id="name" name="name" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="email">Correo electrónico</label>
+              <input type="email" id="email" name="email" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label for="company">Empresa o marca <span
+                  style="font-weight:400; color:var(--muted-foreground)">(opcional)</span></label>
+              <input type="text" id="company" name="company" autocomplete="organization">
+            </div>
+            <div class="field">
+              <label for="message">Contanos sobre tu proyecto</label>
+              <textarea id="message" name="message" rows="4" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width:100%" id="submitBtn">
+              Enviar consulta
+              <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </button>
+
+            <p class="form-note">Respondemos dentro de las 24-48hs hábiles. Al enviar este formulario aceptás nuestra
+              <a href="privacidad.html" style="color:var(--primary); text-decoration:underline;">política de
+                privacidad</a>.
+            </p>
+            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <a href="#top" class="brand">JBC</a>
+      <nav class="footer-links" aria-label="Enlaces del pie de página">
+        <a href="#solucion">Soluciones</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <span class="footer-copy" id="footerYear"></span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      document.body.classList.add('is-loading');
+      var pageLoader = document.getElementById('pageLoader');
+      var loaderStart = Date.now();
+      var minDisplay = 1400; // ms mínimo en pantalla, para que no sea un flash
+
+      window.addEventListener('load', function () {
+        var elapsed = Date.now() - loaderStart;
+        var wait = Math.max(0, minDisplay - elapsed);
+        setTimeout(function () {
+          pageLoader.classList.add('hidden');
+          document.body.classList.remove('is-loading');
+          setTimeout(function () { pageLoader.remove(); }, 650);
+        }, wait);
+      });
+
+      /* ---- current year ---- */
+      document.getElementById('footerYear').textContent = '© ' + new Date().getFullYear() + ' JBC. Todos los derechos reservados.';
+
+      /* ---- header shrink on scroll ---- */
+      var header = document.getElementById('siteHeader');
+      var onScroll = function () {
+        header.classList.toggle('scrolled', window.scrollY > 12);
+      };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      /* ---- mobile menu ---- */
+      var navToggle = document.getElementById('navToggle');
+      var mobileMenu = document.getElementById('mobileMenu');
+      var iconMenu = document.getElementById('iconMenu');
+      var iconClose = document.getElementById('iconClose');
+
+      function setMenu(open) {
+        mobileMenu.classList.toggle('open', open);
+        navToggle.setAttribute('aria-expanded', String(open));
+        navToggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+        iconMenu.style.display = open ? 'none' : 'block';
+        iconClose.style.display = open ? 'block' : 'none';
+      }
+      navToggle.addEventListener('click', function () {
+        setMenu(!mobileMenu.classList.contains('open'));
+      });
+      mobileMenu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { setMenu(false); });
+      });
+
+      /* ---- scroll reveal ---- */
+      var revealEls = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+        revealEls.forEach(function (el) { observer.observe(el); });
+      } else {
+        revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+      }
+
+      /* ---- FAQ accordion ---- */
+      document.querySelectorAll('.faq-item').forEach(function (item) {
+        var btn = item.querySelector('.faq-q');
+        btn.addEventListener('click', function () {
+          var isOpen = item.getAttribute('aria-expanded') === 'true';
+          item.setAttribute('aria-expanded', String(!isOpen));
+        });
+      });
+
+      /* ---- contact form (AJAX submit, e.g. to Formspree) ---- */
+      var form = document.getElementById('contactForm');
+      var status = document.getElementById('formStatus');
+      var submitBtn = document.getElementById('submitBtn');
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Basic client-side validation
+        var required = form.querySelectorAll('[required]');
+        var valid = true;
+        required.forEach(function (field) {
+          if (!field.value.trim()) { valid = false; field.style.borderColor = 'oklch(0.62 0.22 25)'; }
+          else { field.style.borderColor = ''; }
+        });
+        if (!valid) {
+          status.textContent = 'Por favor completá los campos obligatorios.';
+          status.className = 'form-status err';
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.7';
+        status.textContent = 'Enviando...';
+        status.className = 'form-status';
+
+        fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        }).then(function (response) {
+          if (response.ok) {
+            status.textContent = '¡Gracias! Recibimos tu consulta y te contactaremos pronto.';
+            status.className = 'form-status ok';
+            form.reset();
+          } else {
+            status.textContent = 'Hubo un problema al enviar el formulario. Probá de nuevo o escribinos por otro medio.';
+            status.className = 'form-status err';
+          }
+        }).catch(function () {
+          status.textContent = 'Hubo un problema de conexión. Probá de nuevo en unos minutos.';
+          status.className = 'form-status err';
+        }).finally(function () {
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = '';
+        });
+      });
+    })();
+  </script>
+</body>
+
+</html>
