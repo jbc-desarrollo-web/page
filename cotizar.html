@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cotizar mi proyecto — JBC</title>
+  <meta name="description"
+    content="Contanos tu proyecto en 5 pasos y preparamos una propuesta a medida. Sitios, landing pages, herramientas y sistemas web.">
+  <meta name="theme-color" content="#15161c">
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%234f7cf6'/%3E%3Cpath d='M9 22 16 8l7 14' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ============ Design tokens (shared with index.html) ============ */
+    :root {
+      color-scheme: dark;
+      --background: oklch(0.16 0.012 264);
+      --foreground: oklch(0.97 0.005 260);
+      --card: oklch(0.20 0.014 264);
+      --card-foreground: oklch(0.97 0.005 260);
+      --primary: oklch(0.62 0.2 258);
+      --primary-foreground: oklch(0.98 0.01 260);
+      --secondary: oklch(0.24 0.014 264);
+      --muted-foreground: oklch(0.72 0.015 262);
+      --border: oklch(1 0 0 / 10%);
+      --input: oklch(1 0 0 / 14%);
+      --ring: oklch(0.62 0.2 258);
+      --danger: oklch(0.72 0.18 25);
+      --radius: 0.85rem;
+      --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+      --font-heading: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 6rem;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--foreground);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--font-heading);
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .container {
+      max-width: 72rem;
+      margin-inline: auto;
+      padding-inline: 1.25rem;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: -4rem;
+      background: var(--primary);
+      color: var(--primary-foreground);
+      padding: .6rem 1rem;
+      border-radius: .5rem;
+      z-index: 100;
+      transition: top .2s ease;
+    }
+
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--ring);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .glass {
+      background: color-mix(in oklch, var(--card) 55%, transparent);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+    }
+
+    /* ============ buttons (shared with index.html) ============ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      height: 3rem;
+      padding-inline: 1.75rem;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: background-color .2s ease, transform .15s ease, box-shadow .2s ease;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn[disabled] {
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: var(--primary-foreground);
+    }
+
+    .btn-primary:hover {
+      background: color-mix(in oklch, var(--primary) 88%, white);
+    }
+
+    .btn-outline {
+      background: color-mix(in oklch, var(--secondary) 40%, transparent);
+      border: 1px solid var(--border);
+      color: var(--foreground);
+    }
+
+    .btn-outline:hover {
+      background: var(--secondary);
+    }
+
+    .btn svg {
+      width: 1rem;
+      height: 1rem;
+      transition: transform .2s ease;
+    }
+
+    .btn:hover svg.arrow {
+      transform: translateX(3px);
+    }
+
+    /* ============ nav (shared with index.html) ============ */
+    .site-header {
+      position: fixed;
+      inset-inline: 0;
+      top: 0;
+      z-index: 50;
+      padding-block: 1rem;
+      transition: padding .3s ease;
+    }
+
+    .site-header.scrolled {
+      padding-block: .5rem;
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .75rem 1rem;
+      border-radius: 1rem;
+      transition: all .3s ease;
+    }
+
+    .site-header.scrolled .site-nav {
+      background: color-mix(in oklch, var(--card) 55%, transparent);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px -10px rgb(0 0 0 / .5);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-family: var(--font-heading);
+      font-size: 1.125rem;
+      font-weight: 700;
+    }
+
+    .brand-mark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.1rem;
+      height: 2.1rem;
+      border-radius: .6rem;
+      background: color-mix(in oklch, var(--primary) 15%, transparent);
+      color: var(--primary);
+      box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--primary) 30%, transparent);
+    }
+
+    .brand-mark svg {
+      width: 1.05rem;
+      height: 1.05rem;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      font-size: .9rem;
+      color: var(--muted-foreground);
+      transition: color .2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--foreground);
+    }
+
+    .nav-cta {
+      display: none;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: .5rem;
+    }
+
+    .nav-toggle svg {
+      width: 1.35rem;
+      height: 1.35rem;
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: .25rem;
+      margin-top: .5rem;
+      border-radius: 1rem;
+      padding: .75rem;
+      background: color-mix(in oklch, var(--card) 55%, transparent);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      display: block;
+      padding: .65rem .75rem;
+      border-radius: .6rem;
+      font-size: .9rem;
+      color: var(--muted-foreground);
+    }
+
+    .mobile-menu a:hover {
+      background: var(--secondary);
+      color: var(--foreground);
+    }
+
+    .mobile-menu .btn {
+      margin-top: .4rem;
+      width: 100%;
+      color: var(--primary-foreground);
+    }
+
+    @media (min-width:768px) {
+      .nav-links {
+        display: flex;
+      }
+
+      .nav-cta {
+        display: flex;
+      }
+
+      .nav-toggle {
+        display: none;
+      }
+
+      .mobile-menu {
+        display: none !important;
+      }
+    }
+
+    /* ============ quote page ============ */
+    .quote {
+      padding: 7rem 0 4rem;
+    }
+
+    .quote-intro {
+      max-width: 40rem;
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    .kicker {
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .quote-intro h1 {
+      font-size: 1.9rem;
+      font-weight: 600;
+      margin-top: .5rem;
+    }
+
+    .quote-intro p {
+      margin-top: 1rem;
+      color: var(--muted-foreground);
+      line-height: 1.65;
+    }
+
+    @media (min-width:768px) {
+      .quote-intro h1 {
+        font-size: 2.4rem;
+      }
+    }
+
+    .wizard {
+      max-width: 44rem;
+      margin: 2.5rem auto 0;
+      border-radius: 1.5rem;
+      padding: 1.75rem;
+    }
+
+    @media (min-width:768px) {
+      .wizard {
+        padding: 2.5rem;
+      }
+    }
+
+    .wizard-progress {
+      margin-bottom: 2rem;
+    }
+
+    .wizard-progress-track {
+      height: 6px;
+      border-radius: 999px;
+      background: var(--secondary);
+      overflow: hidden;
+    }
+
+    .wizard-progress-track span {
+      display: block;
+      height: 100%;
+      width: 20%;
+      border-radius: 999px;
+      background: var(--primary);
+      transition: width .3s ease;
+    }
+
+    .wizard-progress-label {
+      margin-top: .6rem;
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--muted-foreground);
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .step[hidden] {
+      display: none;
+    }
+
+    .step h2 {
+      font-size: 1.35rem;
+      font-weight: 600;
+    }
+
+    .step-hint {
+      color: var(--muted-foreground);
+      font-size: .95rem;
+      line-height: 1.6;
+      margin-top: -.4rem;
+    }
+
+    /* single choice cards (step 1) */
+    .choice-list {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+
+    .choice-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      padding: 1rem 1.15rem;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      background: color-mix(in oklch, var(--secondary) 45%, transparent);
+      cursor: pointer;
+      transition: border-color .18s ease, background .18s ease;
+    }
+
+    .choice-card:hover {
+      border-color: color-mix(in oklch, var(--primary) 40%, var(--border));
+    }
+
+    .choice-card input {
+      position: absolute;
+      opacity: 0;
+      width: 1px;
+      height: 1px;
+    }
+
+    .choice-card .tick {
+      flex: none;
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 999px;
+      border: 2px solid var(--muted-foreground);
+      display: grid;
+      place-items: center;
+      transition: border-color .18s ease;
+    }
+
+    .choice-card .tick::after {
+      content: "";
+      width: .6rem;
+      height: .6rem;
+      border-radius: 999px;
+      background: var(--primary);
+      transform: scale(0);
+      transition: transform .18s ease;
+    }
+
+    .choice-card:has(input:checked) {
+      border-color: var(--primary);
+      background: color-mix(in oklch, var(--primary) 12%, transparent);
+    }
+
+    .choice-card:has(input:checked) .tick {
+      border-color: var(--primary);
+    }
+
+    .choice-card:has(input:checked) .tick::after {
+      transform: scale(1);
+    }
+
+    .choice-card:has(input:focus-visible) {
+      outline: 2px solid var(--ring);
+      outline-offset: 3px;
+    }
+
+    .choice-card-title {
+      font-weight: 500;
+    }
+
+    /* multi choice (step 3) */
+    .check-list {
+      display: grid;
+      gap: .6rem;
+    }
+
+    @media (min-width:560px) {
+      .check-list {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: .6rem;
+      padding: .7rem .85rem;
+      border-radius: .75rem;
+      border: 1px solid var(--border);
+      background: color-mix(in oklch, var(--secondary) 40%, transparent);
+      cursor: pointer;
+      font-size: .92rem;
+      line-height: 1.4;
+    }
+
+    .check-item:has(input:checked) {
+      border-color: var(--primary);
+      background: color-mix(in oklch, var(--primary) 12%, transparent);
+    }
+
+    .check-item:has(input:focus-visible) {
+      outline: 2px solid var(--ring);
+      outline-offset: 2px;
+    }
+
+    .check-item input {
+      margin-top: .15rem;
+      accent-color: var(--primary);
+      flex: none;
+    }
+
+    /* radio groups (step 4) */
+    .wizard-group {
+      display: flex;
+      flex-direction: column;
+      gap: .55rem;
+    }
+
+    .group-label {
+      font-size: .9rem;
+      font-weight: 600;
+    }
+
+    .radio-list {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+
+    .radio-item {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .7rem .9rem;
+      border-radius: .75rem;
+      border: 1px solid var(--border);
+      background: color-mix(in oklch, var(--secondary) 40%, transparent);
+      cursor: pointer;
+      font-size: .95rem;
+    }
+
+    .radio-item:has(input:checked) {
+      border-color: var(--primary);
+      background: color-mix(in oklch, var(--primary) 12%, transparent);
+    }
+
+    .radio-item:has(input:focus-visible) {
+      outline: 2px solid var(--ring);
+      outline-offset: 2px;
+    }
+
+    .radio-item input {
+      accent-color: var(--primary);
+    }
+
+    /* text fields (shared pattern with index.html) */
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+    }
+
+    .field label {
+      font-size: .85rem;
+      font-weight: 600;
+    }
+
+    .field .opt {
+      font-weight: 400;
+      color: var(--muted-foreground);
+    }
+
+    .field input,
+    .field textarea {
+      background: color-mix(in oklch, var(--secondary) 60%, transparent);
+      border: 1px solid var(--input);
+      border-radius: .7rem;
+      padding: .75rem .9rem;
+      color: var(--foreground);
+      font: inherit;
+      resize: vertical;
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      border-color: var(--ring);
+    }
+
+    .wizard [aria-invalid="true"] {
+      border-color: var(--danger);
+    }
+
+    .field-error {
+      color: var(--danger);
+      font-size: .82rem;
+    }
+
+    .check-accept {
+      display: flex;
+      align-items: flex-start;
+      gap: .6rem;
+      font-size: .9rem;
+      line-height: 1.5;
+      color: var(--muted-foreground);
+      cursor: pointer;
+    }
+
+    .check-accept input {
+      margin-top: .15rem;
+      accent-color: var(--primary);
+      flex: none;
+    }
+
+    .check-accept a {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    .wizard-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .wizard-nav .spacer {
+      flex: 1;
+    }
+
+    .form-status {
+      margin-top: 1rem;
+      font-size: .9rem;
+    }
+
+    .form-status.ok {
+      color: oklch(0.75 0.16 150);
+    }
+
+    .form-status.err {
+      color: var(--danger);
+    }
+
+    /* summary */
+    .summary-block {
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1rem 1.15rem;
+      margin-bottom: .75rem;
+      background: color-mix(in oklch, var(--secondary) 30%, transparent);
+    }
+
+    .summary-block-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: .5rem;
+    }
+
+    .summary-block-head h3 {
+      font-size: .95rem;
+      font-weight: 600;
+    }
+
+    .summary-edit {
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: underline;
+      padding: .2rem;
+    }
+
+    .summary-block dl {
+      margin: 0;
+      display: grid;
+      grid-template-columns: minmax(6rem, auto) 1fr;
+      gap: .3rem .8rem;
+      font-size: .88rem;
+    }
+
+    .summary-block dt {
+      color: var(--muted-foreground);
+    }
+
+    .summary-block dd {
+      margin: 0;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .hp-field {
+      position: absolute !important;
+      left: -9999px !important;
+      width: 1px !important;
+      height: 1px !important;
+      overflow: hidden;
+    }
+
+    /* ============ footer (shared with index.html) ============ */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 0;
+    }
+
+    .footer-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      gap: 1.75rem;
+      font-size: .9rem;
+      color: var(--muted-foreground);
+    }
+
+    .footer-links a:hover {
+      color: var(--foreground);
+    }
+
+    .footer-copy {
+      font-size: .85rem;
+      color: var(--muted-foreground);
+    }
+
+    @media (min-width:768px) {
+      .footer-row {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      html {
+        scroll-behavior: auto;
+      }
+
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container">
+      <nav class="site-nav" aria-label="Navegación principal">
+        <a href="index.html" class="brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M4 20 12 4l8 16" />
+            </svg>
+          </span>
+          JBC
+        </a>
+
+        <div class="nav-links">
+          <a href="index.html#solucion">Soluciones</a>
+          <a href="index.html#proceso">Cómo trabajamos</a>
+          <a href="index.html#testimonios">Testimonios</a>
+          <a href="index.html#faq">FAQ</a>
+        </div>
+
+        <div class="nav-cta">
+          <a href="index.html#contacto" class="btn btn-primary">Consulta rápida</a>
+        </div>
+
+        <button type="button" class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false"
+          aria-controls="mobileMenu">
+          <svg id="iconMenu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round">
+            <line x1="4" y1="7" x2="20" y2="7" />
+            <line x1="4" y1="12" x2="20" y2="12" />
+            <line x1="4" y1="17" x2="20" y2="17" />
+          </svg>
+          <svg id="iconClose" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" style="display:none">
+            <line x1="6" y1="6" x2="18" y2="18" />
+            <line x1="18" y1="6" x2="6" y2="18" />
+          </svg>
+        </button>
+      </nav>
+
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html#solucion">Soluciones</a>
+        <a href="index.html#proceso">Cómo trabajamos</a>
+        <a href="index.html#testimonios">Testimonios</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="index.html#contacto" class="btn btn-primary">Consulta rápida</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="quote">
+      <div class="container">
+        <div class="quote-intro">
+          <span class="kicker">Cotización</span>
+          <h1>Contame tu proyecto y armamos la propuesta</h1>
+          <p>Son 5 pasos rápidos. No calculamos precios en el momento: con tus respuestas preparo una propuesta a
+            medida y te respondo dentro de las 24-48hs hábiles.</p>
+        </div>
+
+        <noscript>
+          <p style="max-width:44rem;margin:2rem auto 0;text-align:center;color:var(--muted-foreground)">
+            Este formulario necesita JavaScript activado. Si no podés usarlo, escribinos desde la
+            <a href="index.html#contacto" style="color:var(--primary);text-decoration:underline">página de contacto</a>.
+          </p>
+        </noscript>
+
+        <div class="glass wizard" id="wizard">
+          <div class="wizard-progress" aria-hidden="true">
+            <div class="wizard-progress-track"><span id="progressBar"></span></div>
+            <p class="wizard-progress-label" id="progressLabel">Paso 1 de 5</p>
+          </div>
+          <div class="sr-only" id="stepAnnounce" role="status" aria-live="polite"></div>
+
+          <!-- ============ STEP 1 ============ -->
+          <section class="step" data-step="1" aria-labelledby="s1-h">
+            <h2 id="s1-h" tabindex="-1">¿Qué necesitás?</h2>
+            <p class="step-hint">Elegí la opción que mejor describa tu proyecto.</p>
+            <div class="choice-list" role="radiogroup" aria-labelledby="s1-h" aria-describedby="err-tipo">
+              <label class="choice-card">
+                <input type="radio" name="tipo" value="sitio">
+                <span class="tick" aria-hidden="true"></span>
+                <span class="choice-card-title">Un sitio web o landing nuevo</span>
+              </label>
+              <label class="choice-card">
+                <input type="radio" name="tipo" value="sistema">
+                <span class="tick" aria-hidden="true"></span>
+                <span class="choice-card-title">Una herramienta o sistema web a medida</span>
+              </label>
+              <label class="choice-card">
+                <input type="radio" name="tipo" value="rediseno">
+                <span class="tick" aria-hidden="true"></span>
+                <span class="choice-card-title">Rediseñar o mejorar algo que ya tengo</span>
+              </label>
+              <label class="choice-card">
+                <input type="radio" name="tipo" value="mantenimiento">
+                <span class="tick" aria-hidden="true"></span>
+                <span class="choice-card-title">Mantenimiento de un sitio existente</span>
+              </label>
+              <label class="choice-card">
+                <input type="radio" name="tipo" value="asesoramiento">
+                <span class="tick" aria-hidden="true"></span>
+                <span class="choice-card-title">No estoy seguro, quiero asesoramiento</span>
+              </label>
+            </div>
+            <p class="field-error" id="err-tipo" data-error-for="tipo" hidden></p>
+            <div class="wizard-nav">
+              <span class="spacer"></span>
+              <button type="button" class="btn btn-primary" data-next>Siguiente</button>
+            </div>
+          </section>
+
+          <!-- ============ STEP 2 ============ -->
+          <section class="step" data-step="2" aria-labelledby="s2-h" hidden>
+            <h2 id="s2-h" tabindex="-1">Contame del proyecto</h2>
+            <div class="field">
+              <label for="rubro">Rubro o actividad</label>
+              <input type="text" id="rubro" name="rubro" autocomplete="organization-title" aria-describedby="err-rubro">
+              <p class="field-error" id="err-rubro" data-error-for="rubro" hidden></p>
+            </div>
+            <div class="field">
+              <label for="problema">¿Qué problema querés resolver?</label>
+              <textarea id="problema" name="problema" rows="4" aria-describedby="err-problema"></textarea>
+              <p class="field-error" id="err-problema" data-error-for="problema" hidden></p>
+            </div>
+            <div class="field">
+              <label for="url_actual">¿Tenés sitio hoy? <span class="opt">URL (opcional)</span></label>
+              <input type="text" id="url_actual" name="url_actual" inputmode="url" placeholder="https://..."
+                aria-describedby="err-url_actual">
+              <p class="field-error" id="err-url_actual" data-error-for="url_actual" hidden></p>
+            </div>
+            <div class="wizard-nav">
+              <button type="button" class="btn btn-outline" data-back>Atrás</button>
+              <button type="button" class="btn btn-primary" data-next>Siguiente</button>
+            </div>
+          </section>
+
+          <!-- ============ STEP 3 ============ -->
+          <section class="step" data-step="3" aria-labelledby="s3-h" hidden>
+            <h2 id="s3-h" tabindex="-1">Funcionalidades</h2>
+            <p class="step-hint" id="s3-hint">Marcá todo lo que tu proyecto pueda necesitar. Es orientativo, lo
+              terminamos de definir juntos.</p>
+            <div class="check-list" id="featureList" role="group" aria-labelledby="s3-h"></div>
+            <div class="field" id="featureOtraWrap" hidden>
+              <label for="feat-otra">¿Cuál? Contanos brevemente</label>
+              <input type="text" id="feat-otra" name="funcionalidad_otra" aria-describedby="err-funcionalidad_otra">
+              <p class="field-error" id="err-funcionalidad_otra" data-error-for="funcionalidad_otra" hidden></p>
+            </div>
+            <div class="wizard-nav">
+              <button type="button" class="btn btn-outline" data-back>Atrás</button>
+              <button type="button" class="btn btn-primary" data-next>Siguiente</button>
+            </div>
+          </section>
+
+          <!-- ============ STEP 4 ============ -->
+          <section class="step" data-step="4" aria-labelledby="s4-h" hidden>
+            <h2 id="s4-h" tabindex="-1">Plazos y alcance</h2>
+
+            <div class="wizard-group" role="radiogroup" aria-labelledby="lbl-plazo" aria-describedby="err-plazo">
+              <span class="group-label" id="lbl-plazo">¿Para cuándo lo necesitás?</span>
+              <div class="radio-list">
+                <label class="radio-item"><input type="radio" name="plazo" value="Lo antes posible"> Lo antes
+                  posible</label>
+                <label class="radio-item"><input type="radio" name="plazo" value="1-2 meses"> 1-2 meses</label>
+                <label class="radio-item"><input type="radio" name="plazo" value="3+ meses"> 3+ meses</label>
+                <label class="radio-item"><input type="radio" name="plazo" value="Solo estoy averiguando"> Solo estoy
+                  averiguando</label>
+              </div>
+              <p class="field-error" id="err-plazo" data-error-for="plazo" hidden></p>
+            </div>
+
+            <div class="wizard-group" role="radiogroup" aria-labelledby="lbl-presupuesto"
+              aria-describedby="err-presupuesto">
+              <span class="group-label" id="lbl-presupuesto">¿Tenés un presupuesto definido?</span>
+              <div class="radio-list">
+                <label class="radio-item"><input type="radio" name="presupuesto" value="Sí, ya tengo un rango"> Sí, ya
+                  tengo un rango</label>
+                <label class="radio-item"><input type="radio" name="presupuesto" value="Todavía no"> Todavía no</label>
+                <label class="radio-item"><input type="radio" name="presupuesto" value="Prefiero no decirlo"> Prefiero
+                  no decirlo</label>
+              </div>
+              <p class="field-error" id="err-presupuesto" data-error-for="presupuesto" hidden></p>
+            </div>
+
+            <div class="wizard-group" role="radiogroup" aria-labelledby="lbl-contenido" aria-describedby="err-contenido">
+              <span class="group-label" id="lbl-contenido">Contenido (textos, fotos, logo): ¿lo tenés o hay que
+                producirlo?</span>
+              <div class="radio-list">
+                <label class="radio-item"><input type="radio" name="contenido" value="Ya lo tengo listo"> Ya lo tengo listo</label>
+                <label class="radio-item"><input type="radio" name="contenido" value="Tengo una parte"> Tengo una parte</label>
+                <label class="radio-item"><input type="radio" name="contenido" value="Necesito que lo produzcan ustedes"> Necesito que lo produzcan ustedes</label>
+              </div>
+              <p class="field-error" id="err-contenido" data-error-for="contenido" hidden></p>
+            </div>
+
+            <div class="wizard-nav">
+              <button type="button" class="btn btn-outline" data-back>Atrás</button>
+              <button type="button" class="btn btn-primary" data-next>Siguiente</button>
+            </div>
+          </section>
+
+          <!-- ============ STEP 5 ============ -->
+          <section class="step" data-step="5" aria-labelledby="s5-h" hidden>
+            <h2 id="s5-h" tabindex="-1">¿Cómo te contactamos?</h2>
+            <div class="field">
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" name="nombre" autocomplete="name" aria-describedby="err-nombre">
+              <p class="field-error" id="err-nombre" data-error-for="nombre" hidden></p>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" autocomplete="email" aria-describedby="err-email">
+              <p class="field-error" id="err-email" data-error-for="email" hidden></p>
+            </div>
+            <div class="field">
+              <label for="whatsapp">WhatsApp <span class="opt">(opcional)</span></label>
+              <input type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" inputmode="tel">
+            </div>
+            <div class="field">
+              <label for="empresa">Empresa o marca <span class="opt">(opcional)</span></label>
+              <input type="text" id="empresa" name="empresa" autocomplete="organization">
+            </div>
+            <label class="check-accept">
+              <input type="checkbox" id="acepto" name="acepto" aria-describedby="err-acepto">
+              <span>Acepto la <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a> y el
+                tratamiento de mis datos para responder esta solicitud.</span>
+            </label>
+            <p class="field-error" id="err-acepto" data-error-for="acepto" hidden></p>
+            <div class="wizard-nav">
+              <button type="button" class="btn btn-outline" data-back>Atrás</button>
+              <button type="button" class="btn btn-primary" data-next>Revisar</button>
+            </div>
+          </section>
+
+          <!-- ============ STEP 6 — SUMMARY ============ -->
+          <section class="step" data-step="6" aria-labelledby="s6-h" hidden>
+            <h2 id="s6-h" tabindex="-1">Revisá tu solicitud</h2>
+            <p class="step-hint">Si algo no está bien, editá el bloque correspondiente. Después de enviar te respondo
+              dentro de las 24-48hs hábiles.</p>
+            <div id="summary"></div>
+            <div class="wizard-nav">
+              <button type="button" class="btn btn-outline" data-back>Atrás</button>
+              <button type="button" class="btn btn-primary" id="sendBtn">
+                Enviar solicitud
+                <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </button>
+            </div>
+            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+          </section>
+
+          <!-- ============ DONE ============ -->
+          <section class="step" data-step="done" aria-labelledby="done-h" hidden>
+            <h2 id="done-h" tabindex="-1">¡Gracias! Recibimos tu solicitud</h2>
+            <p class="step-hint">Te respondo dentro de las 24-48hs hábiles con una propuesta para tu proyecto. Este es
+              el resumen de lo que enviaste:</p>
+            <div id="summaryDone"></div>
+            <div class="wizard-nav">
+              <span class="spacer"></span>
+              <a href="index.html" class="btn btn-outline">Volver al inicio</a>
+            </div>
+          </section>
+
+          <!-- honeypot: no lo completes -->
+          <input class="hp-field" type="text" id="hp" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <a href="index.html" class="brand">JBC</a>
+      <nav class="footer-links" aria-label="Enlaces del pie de página">
+        <a href="index.html#solucion">Soluciones</a>
+        <a href="index.html#proceso">Proceso</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="index.html#contacto">Contacto</a>
+      </nav>
+      <span class="footer-copy" id="footerYear"></span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var $ = function (sel, ctx) { return (ctx || document).querySelector(sel); };
+      var $$ = function (sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); };
+
+      /* ---- current year (shared with index.html) ---- */
+      $('#footerYear').textContent = '© ' + new Date().getFullYear() + ' JBC. Todos los derechos reservados.';
+
+      /* ---- header shrink on scroll (shared with index.html) ---- */
+      var header = $('#siteHeader');
+      var onScroll = function () { header.classList.toggle('scrolled', window.scrollY > 12); };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      /* ---- mobile menu (shared with index.html) ---- */
+      var navToggle = $('#navToggle');
+      var mobileMenu = $('#mobileMenu');
+      var iconMenu = $('#iconMenu');
+      var iconClose = $('#iconClose');
+      function setMenu(open) {
+        mobileMenu.classList.toggle('open', open);
+        navToggle.setAttribute('aria-expanded', String(open));
+        navToggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+        iconMenu.style.display = open ? 'none' : 'block';
+        iconClose.style.display = open ? 'block' : 'none';
+      }
+      navToggle.addEventListener('click', function () {
+        setMenu(!mobileMenu.classList.contains('open'));
+      });
+      mobileMenu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { setMenu(false); });
+      });
+
+      /* ============ wizard ============ */
+      var KEY = 'jbc_cotizar_v1';
+      var ENDPOINT = 'https://formspree.io/f/maqrzekp';
+
+      var TYPES = {
+        sitio: 'Un sitio web o landing nuevo',
+        sistema: 'Una herramienta o sistema web a medida',
+        rediseno: 'Rediseñar o mejorar algo que ya tengo',
+        mantenimiento: 'Mantenimiento de un sitio existente',
+        asesoramiento: 'No estoy seguro, quiero asesoramiento'
+      };
+
+      var FEATURES = {
+        contacto: 'Formulario de contacto',
+        whatsapp: 'Botón / enlace de WhatsApp',
+        catalogo: 'Catálogo o productos',
+        turnos: 'Turnos y reservas',
+        login: 'Login de usuarios',
+        panel: 'Panel de administración',
+        pagos: 'Pagos online',
+        blog: 'Blog o noticias',
+        idiomas: 'Multi-idioma',
+        integracion: 'Integración con sistemas que ya uso',
+        archivos: 'Carga de archivos',
+        reportes: 'Reportes',
+        otra: 'Otra (la describo)'
+      };
+
+      var FEATURES_BY_TYPE = {
+        sitio: ['contacto', 'whatsapp', 'catalogo', 'turnos', 'pagos', 'blog', 'idiomas', 'integracion', 'archivos', 'otra'],
+        sistema: ['login', 'panel', 'turnos', 'pagos', 'archivos', 'reportes', 'integracion', 'contacto', 'whatsapp', 'idiomas', 'otra'],
+        rediseno: ['contacto', 'whatsapp', 'catalogo', 'turnos', 'login', 'panel', 'pagos', 'blog', 'idiomas', 'integracion', 'otra'],
+        mantenimiento: ['contacto', 'whatsapp', 'catalogo', 'blog', 'idiomas', 'integracion', 'archivos', 'reportes', 'otra'],
+        asesoramiento: ['contacto', 'whatsapp', 'catalogo', 'turnos', 'login', 'panel', 'pagos', 'blog', 'idiomas', 'integracion', 'archivos', 'reportes', 'otra']
+      };
+
+      var S3_HINT = {
+        _default: 'Marcá todo lo que tu proyecto pueda necesitar. Es orientativo, lo terminamos de definir juntos.',
+        mantenimiento: 'Marcá lo que quieras sumar o revisar durante el mantenimiento. Es orientativo.',
+        asesoramiento: 'Marcá lo que te suene relevante. Si no estás seguro, dejalo vacío y lo vemos juntos.'
+      };
+
+      var data = blank();
+      var current = 1;
+      var steps = $$('.step', $('#wizard'));
+
+      function blank() {
+        return {
+          tipo: '', rubro: '', problema: '', url_actual: '',
+          funcionalidades: [], func_otra: '',
+          plazo: '', presupuesto: '', contenido: '',
+          nombre: '', email: '', whatsapp: '', empresa: '', acepto: false
+        };
+      }
+
+      function esc(s) {
+        return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+      }
+
+      function save() {
+        if (current === 'done') return;
+        try { sessionStorage.setItem(KEY, JSON.stringify({ step: current, data: data })); } catch (e) { }
+      }
+
+      function stepEl(n) {
+        return steps.filter(function (s) { return String(s.dataset.step) === String(n); })[0];
+      }
+
+      /* ---- read every field into `data` ---- */
+      function collect() {
+        var t = $('input[name="tipo"]:checked');
+        data.tipo = t ? t.value : '';
+        data.rubro = $('#rubro').value;
+        data.problema = $('#problema').value;
+        data.url_actual = $('#url_actual').value;
+        data.funcionalidades = $$('input[name="func"]:checked').map(function (c) { return c.value; });
+        data.func_otra = $('#feat-otra').value;
+        data.plazo = radioVal('plazo');
+        data.presupuesto = radioVal('presupuesto');
+        data.contenido = radioVal('contenido');
+        data.nombre = $('#nombre').value;
+        data.email = $('#email').value;
+        data.whatsapp = $('#whatsapp').value;
+        data.empresa = $('#empresa').value;
+        data.acepto = $('#acepto').checked;
+      }
+
+      function radioVal(name) {
+        var el = $('input[name="' + name + '"]:checked');
+        return el ? el.value : '';
+      }
+
+      /* ---- write `data` back into the fields (used on F5 restore) ---- */
+      function applyData() {
+        setRadio('tipo', data.tipo);
+        $('#rubro').value = data.rubro;
+        $('#problema').value = data.problema;
+        $('#url_actual').value = data.url_actual;
+        renderFeatures();
+        $('#feat-otra').value = data.func_otra;
+        setRadio('plazo', data.plazo);
+        setRadio('presupuesto', data.presupuesto);
+        setRadio('contenido', data.contenido);
+        $('#nombre').value = data.nombre;
+        $('#email').value = data.email;
+        $('#whatsapp').value = data.whatsapp;
+        $('#empresa').value = data.empresa;
+        $('#acepto').checked = !!data.acepto;
+      }
+
+      function setRadio(name, value) {
+        if (!value) return;
+        $$('input[name="' + name + '"]').forEach(function (el) {
+          if (el.value === value) el.checked = true;
+        });
+      }
+
+      /* ---- step 3: options depend on step 1 ---- */
+      function renderFeatures() {
+        var list = $('#featureList');
+        var allowed = FEATURES_BY_TYPE[data.tipo] || [];
+        data.funcionalidades = data.funcionalidades.filter(function (v) { return allowed.indexOf(v) !== -1; });
+        list.innerHTML = allowed.map(function (k) {
+          return '<label class="check-item"><input type="checkbox" name="func" value="' + k + '"' +
+            (data.funcionalidades.indexOf(k) !== -1 ? ' checked' : '') +
+            '> <span>' + esc(FEATURES[k]) + '</span></label>';
+        }).join('');
+        $('#s3-hint').textContent = S3_HINT[data.tipo] || S3_HINT._default;
+        toggleOtra();
+      }
+
+      function toggleOtra() {
+        var on = $$('input[name="func"]:checked').some(function (c) { return c.value === 'otra'; });
+        $('#featureOtraWrap').hidden = !on;
+        if (!on) { $('#feat-otra').value = ''; data.func_otra = ''; }
+      }
+
+      /* ---- errors ---- */
+      function clearErrors(n) {
+        $$('[data-error-for]', stepEl(n)).forEach(function (p) { p.hidden = true; p.textContent = ''; });
+        $$('[aria-describedby]', stepEl(n)).forEach(function (el) { el.removeAttribute('aria-invalid'); });
+      }
+
+      function showError(n, name, msg) {
+        var p = $('[data-error-for="' + name + '"]', stepEl(n));
+        if (p) { p.textContent = msg; p.hidden = false; }
+        $$('[aria-describedby="err-' + name + '"]', stepEl(n)).forEach(function (el) {
+          el.setAttribute('aria-invalid', 'true');
+        });
+      }
+
+      function validateStep(n) {
+        clearErrors(n);
+        collect();
+        var bad = [];
+        var mark = function (name, msg, focusSel) { showError(n, name, msg); bad.push(focusSel); };
+
+        if (n === 1 && !data.tipo) {
+          mark('tipo', 'Elegí una opción para continuar.', 'input[name="tipo"]');
+        }
+        if (n === 2) {
+          if (!data.rubro.trim()) mark('rubro', 'Contanos tu rubro o actividad.', '#rubro');
+          if (!data.problema.trim()) mark('problema', 'Contanos qué querés resolver.', '#problema');
+          if (data.url_actual.trim() && !/\.[a-z]{2,}/i.test(data.url_actual)) {
+            mark('url_actual', 'Ingresá una URL válida (ej. midominio.com) o dejá el campo vacío.', '#url_actual');
+          }
+        }
+        if (n === 3) {
+          if (data.funcionalidades.indexOf('otra') !== -1 && !data.func_otra.trim()) {
+            mark('funcionalidad_otra', 'Describí brevemente la otra funcionalidad.', '#feat-otra');
+          }
+        }
+        if (n === 4) {
+          if (!data.plazo) mark('plazo', 'Elegí una opción.', 'input[name="plazo"]');
+          if (!data.presupuesto) mark('presupuesto', 'Elegí una opción.', 'input[name="presupuesto"]');
+          if (!data.contenido) mark('contenido', 'Elegí una opción.', 'input[name="contenido"]');
+        }
+        if (n === 5) {
+          if (!data.nombre.trim()) mark('nombre', 'Ingresá tu nombre.', '#nombre');
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())) {
+            mark('email', 'Ingresá un correo electrónico válido.', '#email');
+          }
+          if (!data.acepto) {
+            mark('acepto', 'Necesitamos tu aceptación de la política de privacidad para continuar.', '#acepto');
+          }
+        }
+
+        if (bad.length) {
+          var el = $(bad[0], stepEl(n));
+          if (el && el.focus) el.focus();
+          return false;
+        }
+        return true;
+      }
+
+      /* ---- navigation ---- */
+      function goTo(n, skipFocus) {
+        current = n;
+        steps.forEach(function (s) { s.hidden = String(s.dataset.step) !== String(n); });
+
+        if (n !== 'done') {
+          var num = Math.min(Number(n), 5);
+          $('#progressBar').style.width = (num / 5 * 100) + '%';
+          $('#progressLabel').textContent = Number(n) <= 5 ? ('Paso ' + n + ' de 5') : 'Revisión final';
+        }
+        if (n === 6) renderSummary($('#summary'), true);
+
+        var h = stepEl(n).querySelector('h2');
+        var label = h ? h.textContent : '';
+        if (h && !skipFocus) {
+          try { h.focus({ preventScroll: true }); } catch (e) { h.focus(); }
+          $('#stepAnnounce').textContent = (typeof n === 'number' && n <= 5)
+            ? ('Paso ' + n + ' de 5. ' + label) : label;
+          var top = $('#wizard').getBoundingClientRect().top + window.scrollY - 90;
+          var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+          window.scrollTo({ top: top, behavior: reduce ? 'auto' : 'smooth' });
+        }
+        if (n !== 'done') save();
+      }
+
+      function next() { if (validateStep(current)) goTo(current + 1); }
+      function back() { if (typeof current === 'number' && current > 1) goTo(current - 1); }
+
+      /* ---- summary ---- */
+      function featureLabels() {
+        var out = data.funcionalidades.filter(function (v) { return v !== 'otra'; })
+          .map(function (v) { return FEATURES[v]; });
+        if (data.funcionalidades.indexOf('otra') !== -1 && data.func_otra.trim()) {
+          out.push('Otra: ' + data.func_otra.trim());
+        }
+        return out;
+      }
+
+      function renderSummary(el, editable) {
+        var row = function (dt, dd) { return '<dt>' + dt + '</dt><dd>' + esc(dd || '—') + '</dd>'; };
+        var feats = featureLabels();
+        var block = function (step, title, rows) {
+          return '<div class="summary-block"><div class="summary-block-head"><h3>' + title + '</h3>' +
+            (editable ? '<button type="button" class="summary-edit" data-goto="' + step + '">Editar</button>' : '') +
+            '</div><dl>' + rows + '</dl></div>';
+        };
+        el.innerHTML =
+          block(1, '¿Qué necesitás?', row('Tipo', TYPES[data.tipo])) +
+          block(2, 'El proyecto',
+            row('Rubro', data.rubro) + row('Problema a resolver', data.problema) + row('Sitio actual', data.url_actual)) +
+          block(3, 'Funcionalidades', row('Seleccionadas', feats.length ? feats.join(', ') : 'A definir juntos')) +
+          block(4, 'Plazos y alcance',
+            row('Plazo', data.plazo) + row('Presupuesto', data.presupuesto) + row('Contenido', data.contenido)) +
+          block(5, 'Contacto',
+            row('Nombre', data.nombre) + row('Email', data.email) + row('WhatsApp', data.whatsapp) + row('Empresa', data.empresa));
+      }
+
+      /* ---- brief that gets emailed (same Formspree endpoint as the index form) ---- */
+      function buildBrief() {
+        var feats = featureLabels();
+        return [
+          'SOLICITUD DE COTIZACIÓN — jbc-desarrollo-web',
+          '',
+          'Tipo de proyecto: ' + (TYPES[data.tipo] || '—'),
+          'Rubro o actividad: ' + (data.rubro.trim() || '—'),
+          'Problema a resolver: ' + (data.problema.trim() || '—'),
+          'Sitio actual: ' + (data.url_actual.trim() || '—'),
+          'Funcionalidades: ' + (feats.length ? feats.join(', ') : 'A definir'),
+          'Plazo: ' + (data.plazo || '—'),
+          'Presupuesto definido: ' + (data.presupuesto || '—'),
+          'Contenido (textos, fotos, logo): ' + (data.contenido || '—'),
+          '',
+          '--- Contacto ---',
+          'Nombre: ' + (data.nombre.trim() || '—'),
+          'Email: ' + (data.email.trim() || '—'),
+          'WhatsApp: ' + (data.whatsapp.trim() || '—'),
+          'Empresa o marca: ' + (data.empresa.trim() || '—'),
+          'Acepta política de privacidad: Sí'
+        ].join('\n');
+      }
+
+      function finish() {
+        try { sessionStorage.removeItem(KEY); } catch (e) { }
+        renderSummary($('#summaryDone'), false);
+        goTo('done');
+      }
+
+      function send() {
+        if ($('#hp').value) { finish(); return; } /* honeypot */
+        collect();
+        if (!validateStep(5)) { goTo(5); return; }
+
+        var btn = $('#sendBtn');
+        var status = $('#formStatus');
+        btn.disabled = true;
+        btn.style.opacity = '0.7';
+        status.textContent = 'Enviando...';
+        status.className = 'form-status';
+
+        var fd = new FormData();
+        fd.append('name', data.nombre.trim());
+        fd.append('email', data.email.trim());
+        fd.append('_subject', 'Nueva cotización — ' + (data.nombre.trim() || 'sin nombre'));
+        fd.append('mensaje', buildBrief());
+        fd.append('_gotcha', $('#hp').value);
+
+        fetch(ENDPOINT, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } })
+          .then(function (response) {
+            if (response.ok) {
+              finish();
+            } else {
+              return response.json().then(function (d) {
+                status.textContent = (d && d.errors && d.errors.length)
+                  ? d.errors.map(function (e) { return e.message; }).join(' ')
+                  : 'Hubo un problema al enviar la solicitud. Probá de nuevo o escribinos desde la página de contacto.';
+                status.className = 'form-status err';
+              });
+            }
+          })
+          .catch(function () {
+            status.textContent = 'Hubo un problema de conexión. Probá de nuevo en unos minutos.';
+            status.className = 'form-status err';
+          })
+          .finally(function () {
+            btn.disabled = false;
+            btn.style.opacity = '';
+          });
+      }
+
+      /* ---- events ---- */
+      var wizard = $('#wizard');
+
+      wizard.addEventListener('change', function (e) {
+        if (e.target.name === 'tipo') renderFeatures();
+        if (e.target.name === 'func') toggleOtra();
+        collect();
+        save();
+      });
+
+      wizard.addEventListener('input', function () { collect(); save(); });
+
+      wizard.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && e.target.tagName === 'INPUT' &&
+          e.target.type !== 'checkbox' && e.target.type !== 'radio') {
+          e.preventDefault();
+          next();
+        }
+      });
+
+      wizard.addEventListener('click', function (e) {
+        var t = e.target.closest('button');
+        if (!t) return;
+        if (t.hasAttribute('data-next')) next();
+        else if (t.hasAttribute('data-back')) back();
+        else if (t.id === 'sendBtn') send();
+        else if (t.classList.contains('summary-edit')) goTo(Number(t.dataset.goto));
+      });
+
+      /* ---- restore from sessionStorage (survives an accidental F5) ---- */
+      try {
+        var saved = JSON.parse(sessionStorage.getItem(KEY) || 'null');
+        if (saved && saved.data) {
+          var d = saved.data;
+          Object.keys(data).forEach(function (k) { if (k in d) data[k] = d[k]; });
+          if (!Array.isArray(data.funcionalidades)) data.funcionalidades = [];
+          if (typeof saved.step === 'number' && saved.step >= 1 && saved.step <= 6) current = saved.step;
+        }
+      } catch (e) { }
+
+      applyData();
+      collect();
+      goTo(current, true);
+    })();
+  </script>
+</body>
+
+</html>
