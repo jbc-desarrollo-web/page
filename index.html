@@ -4,35 +4,129 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JBC — Desarrollo web: sitios, landing pages y sistemas a medida</title>
+  <title>Estudio JBC — Desarrollo web: sitios, landing pages y sistemas a medida</title>
   <meta name="description"
     content="Desarrollo web a medida: sitios institucionales, landing pages, herramientas y sistemas web, rediseño y mantenimiento. Soluciones enfocadas en resolver problemas concretos de tu negocio.">
-  <meta name="theme-color" content="#15161c">
-  <link rel="icon"
-    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%234f7cf6'/%3E%3Cpath d='M9 22 16 8l7 14' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
-    rel="stylesheet">
+  <meta name="theme-color" content="#05152F">
+  <link rel="canonical" href="https://jbc-desarrollo-web.github.io/page/">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Estudio JBC">
+  <meta property="og:title" content="Estudio JBC — Desarrollo web: sitios, landing pages y sistemas a medida">
+  <meta property="og:description"
+    content="Diseñamos y desarrollamos sitios institucionales, landing pages, herramientas y sistemas web a medida. Análisis, desarrollo y mantenimiento.">
+  <meta property="og:url" content="https://jbc-desarrollo-web.github.io/page/">
+  <meta property="og:image" content="https://jbc-desarrollo-web.github.io/page/assets/brand/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Estudio JBC — Desarrollo web: sitios, landing pages y sistemas a medida">
+  <meta name="twitter:description"
+    content="Diseñamos y desarrollamos sitios institucionales, landing pages, herramientas y sistemas web a medida.">
+  <meta name="twitter:image" content="https://jbc-desarrollo-web.github.io/page/assets/brand/og-image.png">
+
+  <!-- Favicons — ver assets/brand/COMO-USAR.md -->
+  <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/brand/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+
+  <!-- Fuentes autohosteadas — ver docs/design-system.md -->
+  <link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+
   <style>
-    /* ============ Design tokens (matches supplied style reference) ============ */
+    /* ============ Fuentes — autohosteadas, ver docs/design-system.md ============ */
+    @font-face {
+      font-family: 'Space Grotesk';
+      font-style: normal;
+      font-weight: 500 700;
+      font-display: swap;
+      src: url('assets/fonts/space-grotesk-latin.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400 600;
+      font-display: swap;
+      src: url('assets/fonts/inter-latin.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    @font-face {
+      font-family: 'JetBrains Mono';
+      font-style: normal;
+      font-weight: 500 600;
+      font-display: swap;
+      src: url('assets/fonts/jetbrains-mono-latin.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    /* Métricas de reemplazo aproximadas (no medidas con herramienta de introspección esta sesión)
+       para reducir el salto de layout entre la fuente de sistema y la fuente real. */
+    @font-face {
+      font-family: 'Inter Fallback';
+      src: local('Arial');
+      ascent-override: 90.2%;
+      descent-override: 22.48%;
+      line-gap-override: 0%;
+      size-adjust: 107.3%;
+    }
+
+    @font-face {
+      font-family: 'Space Grotesk Fallback';
+      src: local('Arial');
+      ascent-override: 101%;
+      descent-override: 27%;
+      line-gap-override: 0%;
+      size-adjust: 104%;
+    }
+
+    /* ============ Design tokens ============ */
     :root {
-      color-scheme: dark;
-      --background: oklch(0.16 0.012 264);
-      --foreground: oklch(0.97 0.005 260);
-      --card: oklch(0.20 0.014 264);
-      --card-foreground: oklch(0.97 0.005 260);
-      --primary: oklch(0.62 0.2 258);
-      --primary-foreground: oklch(0.98 0.01 260);
-      --secondary: oklch(0.24 0.014 264);
-      --muted-foreground: oklch(0.72 0.015 262);
-      --border: oklch(1 0 0 / 10%);
-      --input: oklch(1 0 0 / 14%);
-      --ring: oklch(0.62 0.2 258);
-      --radius: 0.85rem;
-      --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-      --font-heading: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+      color-scheme: light;
+
+      /* Marca — extraída del logo real (ver assets/brand/COMO-USAR.md) */
+      --navy-950: #030B20;
+      --navy-900: #05152F;
+      --navy-800: #071836;
+      --navy-700: #0C2450;
+      --navy-600: #13356F;
+      --navy-500: #1E4A8F;
+      --navy-400: #4A72AD;
+      --navy-300: #8AA5C8;
+      --navy-200: #C4D2E3;
+      --navy-100: #E8EDF4;
+
+      /* Neutros cálidos */
+      --bone: #FAF9F6;
+      --sand-100: #F1EDE6;
+      --sand-300: #DCD5C9;
+
+      /* Acento — con cuentagotas, nunca como texto sobre fondo claro */
+      --acento: #C8A882;
+
+      /* Estado */
+      --danger: #8C1D18;
+      --success: #155A30;
+
+      /* Semánticos */
+      --bg: var(--bone);
+      --bg-alt: var(--sand-100);
+      --text: var(--navy-900);
+      --text-secondary: var(--navy-600);
+      --text-muted: var(--navy-500);
+      --border-decor: var(--sand-300);
+      --border-ui: var(--navy-400);
+      --ring: var(--navy-400);
+      --on-navy: #FFFFFF;
+      --on-navy-muted: var(--navy-200);
+
+      --radius: 4px;
+      --font-display: 'Space Grotesk', 'Space Grotesk Fallback', ui-sans-serif, system-ui, sans-serif;
+      --font-sans: 'Inter', 'Inter Fallback', ui-sans-serif, system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
     }
 
     *,
@@ -43,25 +137,26 @@
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 6rem;
+      scroll-padding-top: 5.5rem;
     }
 
     body {
       margin: 0;
-      background: var(--background);
-      color: var(--foreground);
+      background: var(--bg);
+      color: var(--text);
       font-family: var(--font-sans);
       -webkit-font-smoothing: antialiased;
-      line-height: 1.5;
+      line-height: 1.65;
     }
 
     h1,
     h2,
     h3,
     h4 {
-      font-family: var(--font-heading);
+      font-family: var(--font-display);
       margin: 0;
       letter-spacing: -0.02em;
+      line-height: 1.1;
     }
 
     p {
@@ -94,7 +189,7 @@
     }
 
     .container {
-      max-width: 72rem;
+      max-width: 75rem;
       margin-inline: auto;
       padding-inline: 1.25rem;
     }
@@ -104,10 +199,10 @@
       position: absolute;
       left: 1rem;
       top: -4rem;
-      background: var(--primary);
-      color: var(--primary-foreground);
+      background: var(--navy-900);
+      color: var(--on-navy);
       padding: .6rem 1rem;
-      border-radius: .5rem;
+      border-radius: var(--radius);
       z-index: 100;
       transition: top .2s ease;
     }
@@ -119,22 +214,14 @@
     :focus-visible {
       outline: 2px solid var(--ring);
       outline-offset: 3px;
-      border-radius: 4px;
-    }
-
-    /* glass surface, shared across cards/nav/panels */
-    .glass {
-      background: color-mix(in oklch, var(--card) 55%, transparent);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--border);
+      border-radius: 2px;
     }
 
     /* ============ scroll reveal ============ */
     .reveal {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity .7s cubic-bezier(.22, 1, .36, 1), transform .7s cubic-bezier(.22, 1, .36, 1);
+      transform: translateY(20px);
+      transition: opacity .6s cubic-bezier(.22, 1, .36, 1), transform .6s cubic-bezier(.22, 1, .36, 1);
       will-change: opacity, transform;
     }
 
@@ -144,7 +231,9 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .reveal {
+
+      .reveal,
+      .entry-rule {
         opacity: 1 !important;
         transform: none !important;
         transition: none !important;
@@ -155,19 +244,38 @@
       }
     }
 
+    /* ============ mono label ============ */
+    .mono-label {
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: .75rem;
+      font-weight: 500;
+    }
+
+    .kicker {
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: .75rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
     /* ============ buttons ============ */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: .5rem;
-      height: 3rem;
-      padding-inline: 1.75rem;
-      border-radius: 999px;
+      min-height: 3rem;
+      padding: .75rem 1.75rem;
+      border-radius: var(--radius);
       font-size: 1rem;
       font-weight: 600;
       white-space: nowrap;
-      transition: background-color .2s ease, transform .15s ease, box-shadow .2s ease;
+      border: 1px solid transparent;
+      transition: background-color .15s ease, border-color .15s ease, transform .15s ease, color .15s ease;
     }
 
     .btn:active {
@@ -175,32 +283,71 @@
     }
 
     .btn-primary {
-      background: var(--primary);
-      color: var(--primary-foreground);
+      background: var(--navy-900);
+      color: var(--on-navy);
+      border-color: var(--navy-900);
     }
 
     .btn-primary:hover {
-      background: color-mix(in oklch, var(--primary) 88%, white);
+      background: var(--navy-700);
+      border-color: var(--navy-700);
     }
 
     .btn-outline {
-      background: color-mix(in oklch, var(--secondary) 40%, transparent);
-      border: 1px solid var(--border);
-      color: var(--foreground);
+      background: transparent;
+      border-color: var(--navy-400);
+      color: var(--text);
     }
 
     .btn-outline:hover {
-      background: var(--secondary);
+      background: var(--navy-900);
+      border-color: var(--navy-900);
+      color: var(--on-navy);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border-color: rgb(255 255 255 / 55%);
+      color: var(--on-navy);
+    }
+
+    .btn-ghost:hover {
+      background: rgb(255 255 255 / 12%);
+      border-color: var(--on-navy);
+    }
+
+    .btn-fill-light {
+      background: var(--on-navy);
+      color: var(--navy-900);
+      border-color: var(--on-navy);
+    }
+
+    .btn-fill-light:hover {
+      background: var(--acento);
+      border-color: var(--acento);
     }
 
     .btn svg {
       width: 1rem;
       height: 1rem;
+      flex: none;
       transition: transform .2s ease;
     }
 
     .btn:hover svg.arrow {
       transform: translateX(3px);
+    }
+
+    .btn:hover svg.chevron-down {
+      transform: translateY(3px);
+    }
+
+    /* ============ logo (inline SVG, currentColor) ============ */
+    .logo svg {
+      height: 1.5rem;
+      width: auto;
+      display: block;
+      color: inherit;
     }
 
     /* ============ nav ============ */
@@ -210,11 +357,13 @@
       top: 0;
       z-index: 50;
       padding-block: 1rem;
-      transition: padding .3s ease;
+      color: var(--on-navy);
+      transition: padding .3s ease, color .3s ease;
     }
 
     .site-header.scrolled {
       padding-block: .5rem;
+      color: var(--text);
     }
 
     .site-nav {
@@ -222,42 +371,21 @@
       align-items: center;
       justify-content: space-between;
       padding: .75rem 1rem;
-      border-radius: 1rem;
+      border-radius: var(--radius);
       transition: all .3s ease;
     }
 
     .site-header.scrolled .site-nav {
-      background: color-mix(in oklch, var(--card) 55%, transparent);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--border);
-      box-shadow: 0 10px 30px -10px rgb(0 0 0 / .5);
+      background: color-mix(in oklch, var(--bone) 92%, transparent);
+      border: 1px solid var(--border-decor);
+      box-shadow: 0 10px 30px -14px rgb(5 21 47 / .25);
+      backdrop-filter: blur(10px);
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: .6rem;
-      font-family: var(--font-heading);
-      font-size: 1.125rem;
-      font-weight: 700;
-    }
-
-    .brand-mark {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 2.1rem;
-      height: 2.1rem;
-      border-radius: .6rem;
-      background: color-mix(in oklch, var(--primary) 15%, transparent);
-      color: var(--primary);
-      box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--primary) 30%, transparent);
-    }
-
-    .brand-mark svg {
-      width: 1.05rem;
-      height: 1.05rem;
     }
 
     .nav-links {
@@ -268,12 +396,12 @@
 
     .nav-links a {
       font-size: .9rem;
-      color: var(--muted-foreground);
-      transition: color .2s ease;
+      opacity: .85;
+      transition: opacity .2s ease;
     }
 
     .nav-links a:hover {
-      color: var(--foreground);
+      opacity: 1;
     }
 
     .nav-cta {
@@ -282,13 +410,24 @@
       gap: 1rem;
     }
 
+    .site-header:not(.scrolled) .nav-cta .btn-primary {
+      background: var(--on-navy);
+      color: var(--navy-900);
+      border-color: var(--on-navy);
+    }
+
+    .site-header:not(.scrolled) .nav-cta .btn-primary:hover {
+      background: var(--acento);
+      border-color: var(--acento);
+    }
+
     .nav-toggle {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 2.25rem;
-      height: 2.25rem;
-      border-radius: .5rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: var(--radius);
     }
 
     .nav-toggle svg {
@@ -301,11 +440,11 @@
       flex-direction: column;
       gap: .25rem;
       margin-top: .5rem;
-      border-radius: 1rem;
+      border-radius: var(--radius);
       padding: .75rem;
-      background: color-mix(in oklch, var(--card) 55%, transparent);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--border);
+      background: var(--bone);
+      border: 1px solid var(--border-decor);
+      color: var(--text);
     }
 
     .mobile-menu.open {
@@ -315,20 +454,19 @@
     .mobile-menu a {
       display: block;
       padding: .65rem .75rem;
-      border-radius: .6rem;
+      border-radius: var(--radius);
       font-size: .9rem;
-      color: var(--muted-foreground);
+      color: var(--text-secondary);
     }
 
     .mobile-menu a:hover {
-      background: var(--secondary);
-      color: var(--foreground);
+      background: var(--bg-alt);
+      color: var(--text);
     }
 
     .mobile-menu .btn {
       margin-top: .4rem;
       width: 100%;
-      color: var(--primary-foreground);
     }
 
     @media (min-width:768px) {
@@ -349,152 +487,103 @@
       }
     }
 
-    /* ============ hero ============ */
-    .hero {
+    /* ============ entry (pantalla de entrada) ============ */
+    .entry {
       position: relative;
       overflow: hidden;
-      padding: 8rem 0 4rem;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      background: var(--navy-900);
+      background-image: linear-gradient(135deg, #061A3D 0%, #050D24 100%);
+      color: var(--on-navy);
+      padding-block: 6rem 3rem;
     }
 
-    .hero-glow {
+    .entry-grid-bg {
       position: absolute;
       inset: 0;
-      z-index: -1;
+      z-index: 0;
       pointer-events: none;
+      opacity: .35;
+      background-image:
+        linear-gradient(to right, rgb(255 255 255 / .06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgb(255 255 255 / .06) 1px, transparent 1px);
+      background-size: 56px 56px;
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 20% 30%, black 0%, transparent 75%);
+      mask-image: radial-gradient(ellipse 70% 60% at 20% 30%, black 0%, transparent 75%);
     }
 
-    .hero-glow span {
-      position: absolute;
-      border-radius: 999px;
-      filter: blur(120px);
-    }
-
-    .hero-glow .g1 {
-      width: 38rem;
-      height: 38rem;
-      left: 50%;
-      top: -10rem;
-      transform: translateX(-50%);
-      background: color-mix(in oklch, var(--primary) 20%, transparent);
-    }
-
-    .hero-glow .g2 {
-      width: 26rem;
-      height: 26rem;
-      right: -8rem;
-      top: 30%;
-      background: color-mix(in oklch, var(--primary) 10%, transparent);
-    }
-
-    .hero-grid {
-      display: grid;
-      gap: 3rem;
-      align-items: center;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      border: 1px solid var(--border);
-      background: color-mix(in oklch, var(--secondary) 50%, transparent);
-      padding: .35rem .8rem;
-      border-radius: 999px;
-      font-size: .75rem;
-      font-weight: 600;
-      color: var(--muted-foreground);
-    }
-
-    .eyebrow .dot {
-      width: .4rem;
-      height: .4rem;
-      border-radius: 999px;
-      background: var(--primary);
-    }
-
-    .hero h1 {
-      font-size: 2.25rem;
-      font-weight: 600;
-      line-height: 1.08;
-      margin-top: 1.5rem;
-    }
-
-    .hero h1 .accent {
-      color: var(--primary);
-    }
-
-    .hero p.lede {
-      margin-top: 1.5rem;
-      max-width: 34rem;
-      font-size: 1.05rem;
-      line-height: 1.65;
-      color: var(--muted-foreground);
-    }
-
-    .hero-actions {
-      margin-top: 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: .75rem;
-    }
-
-    .hero-visual {
+    .entry-content {
       position: relative;
+      z-index: 1;
+      max-width: 40rem;
     }
 
-    .browser-card {
-      border-radius: 1.5rem;
-      padding: .5rem;
-      box-shadow: 0 25px 60px -20px color-mix(in oklch, var(--primary) 25%, transparent);
+    .entry-logo svg {
+      height: clamp(2.5rem, 6vw, 4rem);
+      width: auto;
+      color: var(--on-navy);
     }
 
-    .browser-window {
-      border-radius: 1.1rem;
-      overflow: hidden;
-      background: var(--card);
-      border: 1px solid var(--border);
+    .entry-rule {
+      margin-top: 1.75rem;
+      width: 3rem;
+      height: 2px;
+      background: var(--acento);
+      transform-origin: left;
     }
 
-    .browser-bar {
+    .entry-lede {
+      margin-top: 1.75rem;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(1.75rem, 4.5vw, 3rem);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      max-width: 22ch;
+    }
+
+    .entry-meta {
+      margin-top: 1.5rem;
+      color: var(--acento);
+    }
+
+    .entry-proof {
+      margin-top: .85rem;
       display: flex;
-      align-items: center;
-      gap: .4rem;
-      padding: .65rem .85rem;
-      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: .4rem 1rem;
+      color: var(--on-navy-muted);
+      font-size: .92rem;
     }
 
-    .browser-bar span {
-      width: .55rem;
-      height: .55rem;
-      border-radius: 999px;
-      background: var(--secondary);
+    .entry-actions {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .85rem;
     }
 
-    .browser-bar .addr {
-      margin-left: .6rem;
-      flex: 1;
-      height: 1.25rem;
-      border-radius: 999px;
-      background: var(--secondary);
-    }
-
-    @media (min-width:1024px) {
-      .hero-grid {
-        grid-template-columns: 1.05fr 1fr;
-      }
-
-      .hero h1 {
-        font-size: 3.5rem;
-      }
-
-      .hero-actions {
-        flex-direction: row;
+    @media (min-width:768px) {
+      .entry {
+        padding-block: 7rem 4rem;
       }
     }
 
     /* ============ sections generic ============ */
     section {
-      padding: 4.5rem 0;
+      padding-block: 5rem;
+    }
+
+    section.alt {
+      background: var(--bg-alt);
+    }
+
+    @media (min-width:1024px) {
+      section {
+        padding-block: 7.5rem;
+      }
     }
 
     .section-head {
@@ -506,80 +595,147 @@
       text-align: center;
     }
 
-    .section-head h2 {
-      font-size: 1.85rem;
-      font-weight: 600;
-    }
-
     .section-head p {
       margin-top: 1rem;
-      color: var(--muted-foreground);
-      line-height: 1.65;
+      max-width: 62ch;
+      color: var(--text-secondary);
     }
 
-    .kicker {
-      font-size: .85rem;
+    .section-head.center p {
+      margin-inline: auto;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
       font-weight: 600;
-      color: var(--primary);
+      margin-top: .5rem;
     }
 
-    @media (min-width:768px) {
-      .section-head h2 {
-        font-size: 2.35rem;
+    /* asimetría — grilla de 12 columnas conceptual */
+    .section-head.asym {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      column-gap: 1.5rem;
+      max-width: none;
+    }
+
+    .section-head.asym .kicker,
+    .section-head.asym h2,
+    .section-head.asym p {
+      grid-column: 1 / -1;
+    }
+
+    @media (min-width:900px) {
+      .section-head.asym .kicker {
+        grid-column: 2 / 6;
+      }
+
+      .section-head.asym h2 {
+        grid-column: 2 / 9;
+        margin-top: .75rem;
+      }
+
+      .section-head.asym p {
+        grid-column: 5 / 12;
+        margin-top: 1.5rem;
+        align-self: end;
       }
     }
 
-    /* ============ problem section ============ */
-    .problem-list {
-      margin-top: 2rem;
+    /* ============ cotización teaser ============ */
+    .quote-teaser-inner {
       display: grid;
-      gap: 1rem;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .quote-teaser h2 {
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 600;
+      margin-top: .5rem;
+      max-width: 22ch;
+    }
+
+    .quote-teaser p {
+      margin-top: 1rem;
+      max-width: 60ch;
+      color: var(--text-secondary);
+    }
+
+    .quote-teaser-steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .quote-teaser-steps span {
+      font-family: var(--font-mono);
+      font-size: .8rem;
+      color: var(--navy-500);
+    }
+
+    .quote-teaser-actions {
+      margin-top: 1.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .85rem;
+    }
+
+    @media (min-width:900px) {
+      .quote-teaser-inner {
+        grid-template-columns: 1.2fr .8fr;
+        gap: 3rem;
+      }
+    }
+
+    /* ============ problema — lista numerada, sin cards ============ */
+    .problem-list {
+      margin-top: 2.5rem;
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--border-decor);
     }
 
     .problem-item {
-      display: flex;
-      gap: .9rem;
-      align-items: flex-start;
-      border-radius: 1rem;
-      padding: 1.1rem 1.3rem;
+      display: grid;
+      grid-template-columns: 3rem 1fr;
+      gap: 1rem;
+      align-items: baseline;
+      padding-block: 1.5rem;
+      border-bottom: 1px solid var(--border-decor);
     }
 
-    .problem-item .ico {
-      flex: none;
-      width: 2.1rem;
-      height: 2.1rem;
-      border-radius: .6rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: color-mix(in oklch, oklch(0.62 0.22 25) 15%, transparent);
-      color: oklch(0.72 0.18 25);
-    }
-
-    .problem-item .ico svg {
-      width: 1.05rem;
-      height: 1.05rem;
+    .problem-item .num {
+      font-family: var(--font-mono);
+      font-size: .8rem;
+      color: var(--navy-500);
     }
 
     .problem-item p {
-      color: var(--muted-foreground);
-      line-height: 1.6;
+      color: var(--text-secondary);
+      max-width: 62ch;
     }
 
     .problem-note {
-      margin-top: 2rem;
-      font-size: 1.05rem;
-      line-height: 1.65;
-      color: var(--foreground);
-      border-left: 2px solid var(--primary);
-      padding-left: 1.1rem;
+      margin-top: 2.5rem;
+      font-size: 1.1rem;
+      font-family: var(--font-display);
+      font-weight: 500;
+      line-height: 1.5;
+      max-width: 44rem;
+      color: var(--text);
+      border-left: 2px solid var(--acento);
+      padding-left: 1.25rem;
     }
 
-    /* ============ cards grid ============ */
+    /* ============ cards (solución) ============ */
     .cards-grid {
       margin-top: 3rem;
       display: grid;
-      gap: 1.5rem;
+      gap: 1px;
+      background: var(--border-decor);
+      border: 1px solid var(--border-decor);
     }
 
     @media (min-width:768px) {
@@ -595,238 +751,183 @@
     }
 
     .card {
-      border-radius: 1.25rem;
+      background: var(--bg);
       padding: 2rem;
-      transition: transform .3s ease;
+      transition: transform .15s ease, background-color .15s ease;
+    }
+
+    section.alt .card {
+      background: var(--bg-alt);
     }
 
     .card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-2px);
     }
 
-    .card .ico {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 3rem;
-      height: 3rem;
-      border-radius: .85rem;
-      background: color-mix(in oklch, var(--primary) 15%, transparent);
-      color: var(--primary);
-      box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--primary) 30%, transparent);
-    }
-
-    .card .ico svg {
-      width: 1.5rem;
-      height: 1.5rem;
+    .card .num {
+      font-family: var(--font-mono);
+      font-size: .8rem;
+      color: var(--navy-500);
     }
 
     .card h3 {
-      margin-top: 1.5rem;
-      font-size: 1.2rem;
+      margin-top: 1.25rem;
+      font-size: 1.15rem;
       font-weight: 600;
     }
 
     .card p {
       margin-top: .75rem;
-      color: var(--muted-foreground);
-      line-height: 1.6;
+      font-size: .95rem;
+      color: var(--text-secondary);
     }
 
-    /* ============ process ============ */
+    /* ============ proceso — bloques con línea, sin cards ============ */
     .process-grid {
-      position: relative;
       margin-top: 3.5rem;
       display: grid;
       gap: 2.5rem;
-    }
-
-    .process-line {
-      display: none;
+      border-top: 1px solid var(--border-decor);
+      padding-top: 2.5rem;
     }
 
     @media (min-width:768px) {
       .process-grid {
         grid-template-columns: repeat(3, 1fr);
+        gap: 3rem;
       }
 
-      .process-line {
-        display: block;
-        position: absolute;
-        top: 1.75rem;
-        left: 0;
-        width: 100%;
-        height: 1px;
-        background: linear-gradient(to right, transparent, var(--border), transparent);
+      .process-step {
+        border-left: 1px solid var(--border-decor);
+        padding-left: 2rem;
       }
-    }
 
-    .process-step {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
+      .process-step:first-child {
+        border-left: none;
+        padding-left: 0;
+      }
     }
 
     .process-step .num {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 3.5rem;
-      height: 3.5rem;
-      border-radius: 1rem;
-      background: var(--primary);
-      color: var(--primary-foreground);
-      box-shadow: 0 10px 25px -6px color-mix(in oklch, var(--primary) 55%, transparent);
-    }
-
-    .process-step .num svg {
-      width: 1.4rem;
-      height: 1.4rem;
-    }
-
-    .process-step .step-index {
-      margin-top: 1.25rem;
-      font-family: var(--font-heading);
-      font-weight: 600;
-      font-size: .85rem;
-      color: var(--primary);
+      font-family: var(--font-mono);
+      font-size: .8rem;
+      color: var(--navy-500);
     }
 
     .process-step h3 {
-      margin-top: .4rem;
+      margin-top: .75rem;
       font-size: 1.2rem;
       font-weight: 600;
     }
 
     .process-step p {
       margin-top: .6rem;
-      max-width: 18rem;
-      color: var(--muted-foreground);
-      line-height: 1.6;
+      max-width: 26rem;
+      color: var(--text-secondary);
     }
 
-    /* ============ testimonials ============ */
-    .testi-grid {
+    /* ============ evidencia (trabajo entregado) ============ */
+    .evidence-list {
       margin-top: 3rem;
+      display: grid;
+      gap: 3rem;
+    }
+
+    .evidence-item {
       display: grid;
       gap: 1.5rem;
     }
 
-    .testi-hint {
-      margin-top: 1.5rem;
-      text-align: center;
-      font-size: .85rem;
-      color: var(--muted-foreground);
+    .evidence-media {
+      aspect-ratio: 16 / 10;
+      border: 1px solid var(--border-decor);
+      border-radius: var(--radius);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: .4rem;
+      background: var(--bg);
+      overflow: hidden;
     }
 
-    @media (min-width:768px) {
-      .testi-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
+    section.alt .evidence-media {
+      background: var(--bg-alt);
     }
 
-    .testi-card {
-      border-radius: 1.25rem;
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
+    .evidence-media img {
+      width: 100%;
       height: 100%;
-      position: relative;
-      transition: transform .25s ease, border-color .25s ease;
+      object-fit: cover;
     }
 
-    .testi-card:hover,
-    .testi-card:focus-within {
-      transform: translateY(-4px);
-      border-color: color-mix(in oklch, var(--primary) 45%, var(--border));
+    .evidence-media span {
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--navy-500);
     }
 
-    .card-link {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      border-radius: inherit;
+    .evidence-body blockquote {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 500;
+      line-height: 1.4;
+      letter-spacing: -0.01em;
     }
 
-    .card-link:focus-visible {
-      outline: 2px solid var(--ring);
-      outline-offset: 3px;
-      border-radius: inherit;
-    }
-
-
-    .stars {
-      display: flex;
-      gap: .2rem;
-      color: var(--primary);
-    }
-
-    .stars svg {
-      width: 1rem;
-      height: 1rem;
-    }
-
-    blockquote {
-      margin: 1.25rem 0 0;
-      flex: 1;
-      line-height: 1.65;
-      color: color-mix(in oklch, var(--foreground) 92%, transparent);
-    }
-
-    .testi-foot {
-      margin-top: 1.5rem;
+    .evidence-foot {
+      margin-top: 1.25rem;
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
       gap: .75rem;
     }
 
-    .avatar {
-      width: 2.75rem;
-      height: 2.75rem;
-      border-radius: 999px;
-      flex: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: color-mix(in oklch, var(--primary) 22%, var(--secondary));
-      color: var(--foreground);
-      font-family: var(--font-heading);
-      font-weight: 600;
-      font-size: .85rem;
-      ring: 1px solid var(--border);
+    .evidence-client {
+      font-family: var(--font-mono);
+      font-size: .8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--text-secondary);
     }
 
-    .testi-name {
+    .evidence-link {
       font-size: .9rem;
       font-weight: 600;
+      color: var(--navy-600);
+      border-bottom: 1px solid var(--navy-400);
+      padding-bottom: 1px;
     }
 
-    .testi-role {
-      font-size: .85rem;
-      color: var(--muted-foreground);
+    .evidence-link:hover {
+      color: var(--navy-900);
+      border-color: var(--navy-900);
     }
 
-    /* ============ FAQ ============ */
+    @media (min-width:768px) {
+      .evidence-item {
+        grid-template-columns: 1.1fr 1fr;
+        align-items: center;
+      }
+
+      .evidence-item:nth-child(even) .evidence-media {
+        order: 2;
+      }
+    }
+
+    /* ============ FAQ — plano ============ */
     .faq-list {
       margin-top: 3rem;
       max-width: 44rem;
       margin-inline: auto;
-      display: flex;
-      flex-direction: column;
-      gap: .75rem;
+      border-top: 1px solid var(--border-decor);
     }
 
     .faq-item {
-      border-radius: 1.25rem;
-      overflow: hidden;
+      border-bottom: 1px solid var(--border-decor);
     }
 
     .faq-q {
@@ -835,22 +936,22 @@
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      padding: 1.15rem 1.4rem;
+      padding-block: 1.25rem;
       text-align: left;
-      font-family: var(--font-heading);
+      font-family: var(--font-display);
       font-size: 1rem;
       font-weight: 500;
     }
 
     .faq-q .plus {
       flex: none;
-      width: 1.25rem;
-      height: 1.25rem;
-      color: var(--primary);
+      width: 1.1rem;
+      height: 1.1rem;
+      color: var(--navy-400);
       transition: transform .3s ease;
     }
 
-    .faq-item[aria-expanded="true"] .plus {
+    .faq-q[aria-expanded="true"] .plus {
       transform: rotate(45deg);
     }
 
@@ -861,7 +962,7 @@
       opacity: 0;
     }
 
-    .faq-item[aria-expanded="true"] .faq-a {
+    .faq-item:has(.faq-q[aria-expanded="true"]) .faq-a {
       grid-template-rows: 1fr;
       opacity: 1;
     }
@@ -871,98 +972,27 @@
     }
 
     .faq-a p {
-      padding: 0 1.4rem 1.25rem;
-      color: var(--muted-foreground);
-      line-height: 1.6;
-    }
-
-    /* ============ final CTA ============ */
-    .final-cta-panel {
-      position: relative;
-      overflow: hidden;
-      border-radius: 1.75rem;
-      padding: 3.5rem 1.5rem;
-      text-align: center;
-    }
-
-    .final-cta-panel .glow {
-      position: absolute;
-      z-index: -1;
-      inset: 0;
-    }
-
-    .final-cta-panel .glow span {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 34rem;
-      height: 34rem;
-      transform: translate(-50%, -50%);
-      border-radius: 999px;
-      background: color-mix(in oklch, var(--primary) 20%, transparent);
-      filter: blur(120px);
-    }
-
-    .final-cta-panel h2 {
-      font-size: 1.85rem;
-      font-weight: 600;
-      max-width: 34rem;
-      margin-inline: auto;
-    }
-
-    .final-cta-panel p {
-      margin-top: 1.1rem;
-      max-width: 32rem;
-      margin-inline: auto;
-      color: var(--muted-foreground);
-      font-size: 1.05rem;
-      line-height: 1.65;
-    }
-
-    .final-cta-actions {
-      margin-top: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: .75rem;
-    }
-
-    .final-cta-actions .btn {
-      white-space: normal;
-      text-align: center;
-      max-width: 100%;
-      line-height: 1.3;
-    }
-
-    @media (max-width:400px) {
-      .final-cta-actions .btn {
-        height: auto;
-        padding-block: .85rem;
-      }
-    }
-
-    @media (min-width:768px) {
-      .final-cta-panel {
-        padding: 5rem 3rem;
-      }
-
-      .final-cta-panel h2 {
-        font-size: 2.75rem;
-      }
+      padding-bottom: 1.25rem;
+      max-width: 62ch;
+      color: var(--text-secondary);
     }
 
     /* ============ contact form ============ */
     .contact-wrap {
       margin-top: 3rem;
-      display: grid;
-      gap: 2rem;
-      max-width: 44rem;
+      max-width: 40rem;
       margin-inline: auto;
     }
 
     .form-card {
-      border-radius: 1.5rem;
+      border: 1px solid var(--border-decor);
+      border-radius: var(--radius);
       padding: 2rem;
+      background: var(--bg);
+    }
+
+    section.alt .form-card {
+      background: var(--bone);
     }
 
     .field {
@@ -979,37 +1009,45 @@
 
     .field input,
     .field textarea {
-      background: color-mix(in oklch, var(--secondary) 60%, transparent);
-      border: 1px solid var(--input);
-      border-radius: .7rem;
+      background: var(--bg);
+      border: 1px solid var(--navy-400);
+      border-radius: var(--radius);
       padding: .75rem .9rem;
-      color: var(--foreground);
+      color: var(--text);
       font: inherit;
       resize: vertical;
     }
 
-    .field input:focus,
-    .field textarea:focus {
+    .field input:focus-visible,
+    .field textarea:focus-visible {
+      outline: 2px solid var(--ring);
+      outline-offset: 1px;
       border-color: var(--ring);
     }
 
     .form-note {
       margin-top: .25rem;
       font-size: .8rem;
-      color: var(--muted-foreground);
+      color: var(--text-secondary);
+    }
+
+    .form-note a {
+      color: var(--navy-600);
+      text-decoration: underline;
     }
 
     .form-status {
       margin-top: 1rem;
       font-size: .9rem;
+      font-weight: 600;
     }
 
     .form-status.ok {
-      color: oklch(0.75 0.16 150);
+      color: var(--success);
     }
 
     .form-status.err {
-      color: oklch(0.72 0.18 25);
+      color: var(--danger);
     }
 
     @media (min-width:768px) {
@@ -1018,12 +1056,11 @@
       }
     }
 
-
-
     /* ============ footer ============ */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 3rem 0;
+      background: var(--navy-900);
+      color: var(--on-navy);
+      padding-block: 3rem;
     }
 
     .footer-row {
@@ -1036,20 +1073,20 @@
 
     .footer-links {
       display: flex;
-      flex-wrap: nowrap;
+      flex-wrap: wrap;
       justify-content: center;
       gap: 1.75rem;
       font-size: .9rem;
-      color: var(--muted-foreground);
+      color: var(--on-navy-muted);
     }
 
     .footer-links a:hover {
-      color: var(--foreground);
+      color: var(--on-navy);
     }
 
     .footer-copy {
       font-size: .85rem;
-      color: var(--muted-foreground);
+      color: var(--on-navy-muted);
     }
 
     @media (min-width:768px) {
@@ -1059,209 +1096,28 @@
         text-align: left;
       }
     }
-
-    body.is-loading {
-      overflow: hidden;
-    }
-
-    .page-loader {
-      position: fixed;
-      inset: 0;
-      z-index: 999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--background);
-      transition: opacity .6s ease, visibility .6s ease;
-    }
-
-    .page-loader.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .loader-glow {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-    }
-
-    .loader-glow span {
-      position: absolute;
-      border-radius: 999px;
-      filter: blur(120px);
-      background: color-mix(in oklch, var(--primary) 22%, transparent);
-    }
-
-    .loader-glow span:nth-child(1) {
-      width: 30rem;
-      height: 30rem;
-      top: -8rem;
-      left: -6rem;
-      animation: loaderFloat 6s ease-in-out infinite;
-    }
-
-    .loader-glow span:nth-child(2) {
-      width: 24rem;
-      height: 24rem;
-      bottom: -8rem;
-      right: -6rem;
-      animation: loaderFloat 7s ease-in-out infinite reverse;
-    }
-
-    @keyframes loaderFloat {
-
-      0%,
-      100% {
-        transform: translate(0, 0);
-      }
-
-      50% {
-        transform: translate(2rem, -1.5rem);
-      }
-    }
-
-    .loader-content {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.25rem;
-    }
-
-    .loader-mark {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 4rem;
-      height: 4rem;
-      border-radius: 1rem;
-      background: color-mix(in oklch, var(--primary) 15%, transparent);
-      color: var(--primary);
-      box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--primary) 35%, transparent);
-      animation: loaderPulse 1.6s ease-in-out infinite;
-    }
-
-    .loader-mark svg {
-      width: 2rem;
-      height: 2rem;
-    }
-
-    @keyframes loaderPulse {
-
-      0%,
-      100% {
-        transform: scale(1);
-      }
-
-      50% {
-        transform: scale(1.08);
-      }
-    }
-
-    .loader-text {
-      font-family: var(--font-heading);
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: .04em;
-      color: var(--foreground);
-      opacity: 0;
-      animation: loaderFadeUp .6s ease forwards .3s;
-    }
-
-    @keyframes loaderFadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .loader-bar {
-      width: 10rem;
-      height: 3px;
-      border-radius: 999px;
-      overflow: hidden;
-      background: var(--secondary);
-    }
-
-    .loader-bar span {
-      display: block;
-      height: 100%;
-      width: 0%;
-      border-radius: 999px;
-      background: var(--primary);
-      animation: loaderProgress 1.8s cubic-bezier(.4, 0, .2, 1) forwards .2s;
-    }
-
-    @keyframes loaderProgress {
-      to {
-        width: 100%;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-
-      .loader-mark,
-      .loader-glow span,
-      .loader-bar span {
-        animation: none;
-      }
-
-      .loader-text {
-        opacity: 1;
-        transform: none;
-      }
-    }
   </style>
 </head>
 
 <body>
-  <div id="pageLoader" class="page-loader" aria-hidden="true">
-    <div class="loader-glow"><span></span><span></span></div>
-    <div class="loader-content">
-      <div class="loader-mark">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
-          stroke-linejoin="round">
-          <path d="M4 20 12 4l8 16" />
-        </svg>
-      </div>
-      <p class="loader-text">JBC</p>
-      <div class="loader-bar"><span></span></div>
-    </div>
-  </div>
-  <noscript>
-    <style>
-      .page-loader {
-        display: none;
-      }
-    </style>
-  </noscript>
 
   <a class="skip-link" href="#main">Saltar al contenido</a>
 
   <header class="site-header" id="siteHeader">
     <div class="container">
       <nav class="site-nav" aria-label="Navegación principal">
-        <a href="#top" class="brand">
-          <span class="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <path d="M4 20 12 4l8 16" />
-            </svg>
-          </span>
-          JBC
+        <a href="#top" class="brand logo">
+          <svg viewBox="0 0 439.53 100" role="img" aria-label="Estudio JBC">
+            <path fill="currentColor" fill-rule="evenodd"
+              d="M 104.12,0.26 C 103.84,0.47 103.83,1.55 103.84,30.32 C 103.84,62.37 103.88,61.56 103.03,64.85 C 101.83,69.68 98.29,74.69 94.2,77.44 C 92.77,78.39 88.48,80.39 87.87,80.39 C 87.66,80.39 87.33,80.48 87.13,80.59 C 86.93,80.69 86.35,80.87 85.86,80.99 C 85.36,81.11 84.65,81.27 84.28,81.37 C 80.28,82.36 79.75,82.38 38.69,82.38 C 12.81,82.38 0.59,82.43 0.36,82.54 C 0.05,82.73-0.15,98.23 0.15,99.36 C 0.33,100.02 0.33,100.02 39.98,99.97 C 89.62,99.89 86.3,100.12 96.85,96.27 C 107.89,92.27 117.63,82.13 120.77,71.38 C 123.09,63.42 122.92,66.56 123.01,30.98 C 123.07,2.51 123.05,0.65 122.79,0.36 C 122.43,-0.06 104.69,-0.14 104.12,0.26 M 157.11,0.37 C 156.62,0.87 156.6,98.98 157.08,99.57 L 157.39,99.95 L 207.31,99.92 C 259.98,99.89 260.13,99.89 263.01,99.14 C 263.55,99.01 264.6,98.75 265.32,98.56 C 276.5,95.69 284.92,87.02 286.73,76.51 C 286.83,75.86 287.03,74.84 287.16,74.21 C 287.78,71.2 286.95,64.57 285.64,62.08 C 285.51,61.83 285.41,61.53 285.41,61.41 C 285.41,61.1 284.01,58.34 283.3,57.25 C 281.38,54.32 279.28,52.21 276.37,50.25 C 274.38,48.93 274.3,48.72 275.49,48.02 C 281.01,44.86 285.69,34.98 285.49,26.91 C 285.1,12 274.33,1.76 257.39,0.21 C 253.3,-0.16 157.49,-0.01 157.11,0.37 M 256.41,17.92 C 261.45,18.89 265.65,22.26 266.33,25.92 C 266.4,26.28 266.55,26.81 266.68,27.11 C 266.96,27.8 266.96,29.52 266.66,30.56 C 266.53,31.01 266.38,31.7 266.33,32.12 C 266.18,33.11 264.88,35.56 263.89,36.65 C 261.9,38.88 259.57,40 255.49,40.73 C 253.32,41.11 177.04,41.18 176.51,40.8 C 176.13,40.52 176.19,18.06 176.57,17.77 C 177.14,17.35 254.21,17.49 256.41,17.92 M 257.39,58.49 C 264.6,59.5 269.97,66.75 267.89,72.67 C 267.7,73.19 267.56,73.73 267.56,73.9 C 267.56,74.05 267.21,74.87 266.78,75.73 C 265.27,78.72 262.74,80.64 258.79,81.83 L 257.22,82.3 L 216.96,82.33 C 194.83,82.36 176.61,82.31 176.49,82.25 C 176.23,82.06 176.19,59.07 176.47,58.55 C 176.62,58.24 177.52,58.24 214.95,58.19 C 255.87,58.16 254.89,58.14 257.39,58.49 M 356.24,0.29 C 354.79,0.39 353.5,0.54 353.4,0.61 C 353.3,0.65 352.39,0.82 351.38,0.95 C 350.37,1.08 349.43,1.27 349.26,1.35 C 349.11,1.43 348.65,1.55 348.24,1.61 C 346.9,1.83 342.9,3.07 340.14,4.13 C 338.71,4.66 334.18,6.89 333.03,7.62 C 322.91,13.96 316.59,21.67 312.69,32.45 C 311.53,35.67 310.28,41.31 310.05,44.43 C 309.86,46.68 309.86,54.87 310.05,56.5 C 310.33,59.3 311.57,65.22 312.11,66.42 C 312.48,67.22 313.19,69.09 313.19,69.22 C 313.19,69.3 313.29,69.58 313.42,69.86 C 314.3,71.85 314.51,72.34 314.51,72.46 C 314.51,72.89 317.34,77.57 319.16,80.15 C 324.86,88.25 334.15,94.68 344.52,97.67 C 352.83,100.07 351.96,100.04 399.85,99.99 C 431.42,99.97 439.04,99.92 439.25,99.74 C 439.58,99.46 439.63,82.91 439.3,82.58 C 439.15,82.43 430.03,82.38 399.34,82.36 C 377.45,82.36 358.97,82.3 358.24,82.21 C 351.89,81.55 346.45,79.7 341.76,76.58 C 335.85,72.66 330.58,64.85 329.65,58.65 C 329.59,58.29 329.44,57.55 329.32,57 C 328.18,52.12 328.68,44.57 330.46,39.14 C 333.95,28.58 342.25,21.3 353.86,18.64 C 358.39,17.6 354.92,17.68 399.06,17.62 C 427.94,17.58 439.12,17.52 439.29,17.39 C 439.57,17.14 439.62,0.89 439.34,0.36 C 439.12,-0.02 361.48,-0.11 356.24,0.29" />
+          </svg>
         </a>
 
         <div class="nav-links">
+          <a href="#cotizacion">Cotización</a>
           <a href="#solucion">Soluciones</a>
           <a href="#proceso">Cómo trabajamos</a>
-          <a href="#testimonios">Testimonios</a>
+          <a href="#testimonios">Trabajo entregado</a>
           <a href="#faq">FAQ</a>
         </div>
 
@@ -1286,9 +1142,10 @@
       </nav>
 
       <div class="mobile-menu" id="mobileMenu">
+        <a href="#cotizacion">Cotización</a>
         <a href="#solucion">Soluciones</a>
         <a href="#proceso">Cómo trabajamos</a>
-        <a href="#testimonios">Testimonios</a>
+        <a href="#testimonios">Trabajo entregado</a>
         <a href="#faq">FAQ</a>
         <a href="cotizar.html" class="btn btn-primary">Cotizar mi proyecto</a>
       </div>
@@ -1297,65 +1154,75 @@
 
   <main id="main">
 
-    <!-- ============ HERO ============ -->
-    <section class="hero" id="top">
-      <div class="hero-glow" aria-hidden="true"><span class="g1"></span><span class="g2"></span></div>
-      <div class="container hero-grid">
-        <div>
-          <div class="reveal">
-            <span class="eyebrow"><span class="dot" aria-hidden="true"></span>Diseño &amp; Desarrollo Web</span>
-          </div>
-          <h1 class="reveal" style="transition-delay:80ms">
-            Tu web debería <span class="accent">trabajar para tu negocio</span>, no solo estar online.
-          </h1>
-          <p class="lede reveal" style="transition-delay:160ms">
-            Diseñamos y desarrollamos sitios institucionales, landing pages, herramientas y sistemas web a medida.
-            Desarrollo, rediseño, mantenimiento y soporte para empresas y marcas personales que buscan una presencia
-            digital profesional y efectiva.
+    <!-- ============ ENTRADA ============ -->
+    <section class="entry" id="top">
+      <div class="entry-grid-bg" aria-hidden="true"></div>
+      <div class="container">
+        <div class="entry-content">
+          <span class="logo entry-logo">
+            <svg viewBox="0 0 439.53 100" role="img" aria-label="Estudio JBC">
+              <path fill="currentColor" fill-rule="evenodd"
+                d="M 104.12,0.26 C 103.84,0.47 103.83,1.55 103.84,30.32 C 103.84,62.37 103.88,61.56 103.03,64.85 C 101.83,69.68 98.29,74.69 94.2,77.44 C 92.77,78.39 88.48,80.39 87.87,80.39 C 87.66,80.39 87.33,80.48 87.13,80.59 C 86.93,80.69 86.35,80.87 85.86,80.99 C 85.36,81.11 84.65,81.27 84.28,81.37 C 80.28,82.36 79.75,82.38 38.69,82.38 C 12.81,82.38 0.59,82.43 0.36,82.54 C 0.05,82.73-0.15,98.23 0.15,99.36 C 0.33,100.02 0.33,100.02 39.98,99.97 C 89.62,99.89 86.3,100.12 96.85,96.27 C 107.89,92.27 117.63,82.13 120.77,71.38 C 123.09,63.42 122.92,66.56 123.01,30.98 C 123.07,2.51 123.05,0.65 122.79,0.36 C 122.43,-0.06 104.69,-0.14 104.12,0.26 M 157.11,0.37 C 156.62,0.87 156.6,98.98 157.08,99.57 L 157.39,99.95 L 207.31,99.92 C 259.98,99.89 260.13,99.89 263.01,99.14 C 263.55,99.01 264.6,98.75 265.32,98.56 C 276.5,95.69 284.92,87.02 286.73,76.51 C 286.83,75.86 287.03,74.84 287.16,74.21 C 287.78,71.2 286.95,64.57 285.64,62.08 C 285.51,61.83 285.41,61.53 285.41,61.41 C 285.41,61.1 284.01,58.34 283.3,57.25 C 281.38,54.32 279.28,52.21 276.37,50.25 C 274.38,48.93 274.3,48.72 275.49,48.02 C 281.01,44.86 285.69,34.98 285.49,26.91 C 285.1,12 274.33,1.76 257.39,0.21 C 253.3,-0.16 157.49,-0.01 157.11,0.37 M 256.41,17.92 C 261.45,18.89 265.65,22.26 266.33,25.92 C 266.4,26.28 266.55,26.81 266.68,27.11 C 266.96,27.8 266.96,29.52 266.66,30.56 C 266.53,31.01 266.38,31.7 266.33,32.12 C 266.18,33.11 264.88,35.56 263.89,36.65 C 261.9,38.88 259.57,40 255.49,40.73 C 253.32,41.11 177.04,41.18 176.51,40.8 C 176.13,40.52 176.19,18.06 176.57,17.77 C 177.14,17.35 254.21,17.49 256.41,17.92 M 257.39,58.49 C 264.6,59.5 269.97,66.75 267.89,72.67 C 267.7,73.19 267.56,73.73 267.56,73.9 C 267.56,74.05 267.21,74.87 266.78,75.73 C 265.27,78.72 262.74,80.64 258.79,81.83 L 257.22,82.3 L 216.96,82.33 C 194.83,82.36 176.61,82.31 176.49,82.25 C 176.23,82.06 176.19,59.07 176.47,58.55 C 176.62,58.24 177.52,58.24 214.95,58.19 C 255.87,58.16 254.89,58.14 257.39,58.49 M 356.24,0.29 C 354.79,0.39 353.5,0.54 353.4,0.61 C 353.3,0.65 352.39,0.82 351.38,0.95 C 350.37,1.08 349.43,1.27 349.26,1.35 C 349.11,1.43 348.65,1.55 348.24,1.61 C 346.9,1.83 342.9,3.07 340.14,4.13 C 338.71,4.66 334.18,6.89 333.03,7.62 C 322.91,13.96 316.59,21.67 312.69,32.45 C 311.53,35.67 310.28,41.31 310.05,44.43 C 309.86,46.68 309.86,54.87 310.05,56.5 C 310.33,59.3 311.57,65.22 312.11,66.42 C 312.48,67.22 313.19,69.09 313.19,69.22 C 313.19,69.3 313.29,69.58 313.42,69.86 C 314.3,71.85 314.51,72.34 314.51,72.46 C 314.51,72.89 317.34,77.57 319.16,80.15 C 324.86,88.25 334.15,94.68 344.52,97.67 C 352.83,100.07 351.96,100.04 399.85,99.99 C 431.42,99.97 439.04,99.92 439.25,99.74 C 439.58,99.46 439.63,82.91 439.3,82.58 C 439.15,82.43 430.03,82.38 399.34,82.36 C 377.45,82.36 358.97,82.3 358.24,82.21 C 351.89,81.55 346.45,79.7 341.76,76.58 C 335.85,72.66 330.58,64.85 329.65,58.65 C 329.59,58.29 329.44,57.55 329.32,57 C 328.18,52.12 328.68,44.57 330.46,39.14 C 333.95,28.58 342.25,21.3 353.86,18.64 C 358.39,17.6 354.92,17.68 399.06,17.62 C 427.94,17.58 439.12,17.52 439.29,17.39 C 439.57,17.14 439.62,0.89 439.34,0.36 C 439.12,-0.02 361.48,-0.11 356.24,0.29" />
+            </svg>
+          </span>
+
+          <div class="entry-rule reveal" aria-hidden="true"></div>
+
+          <h1 class="entry-lede reveal" style="transition-delay:60ms">Análisis, desarrollo y mantenimiento de
+            sistemas y sitios web.</h1>
+
+          <p class="mono-label entry-meta reveal" style="transition-delay:120ms">Corrientes &amp; Chaco — Diseño
+            &amp; desarrollo web — 2026</p>
+
+          <p class="entry-proof reveal" style="transition-delay:160ms">
+            <span>+3 años programando</span>
+            <span>+10 proyectos en curso</span>
           </p>
-          <div class="hero-actions reveal" style="transition-delay:240ms">
-            <a href="#contacto" class="btn btn-primary">
-              Solicitar una consulta
-              <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+
+          <div class="entry-actions reveal" style="transition-delay:220ms">
+            <a href="#cotizacion" class="btn btn-fill-light">
+              Explorar
+              <svg class="chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                 stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <polyline points="19 12 12 19 5 12" />
               </svg>
             </a>
-            <a href="#proceso" class="btn btn-outline">Ver cómo trabajamos</a>
+            <a href="https://wa.me/5493795053196?text=Hola%20Estudio%20JBC%2C%20vi%20su%20sitio%20y%20quer%C3%ADa%20consultar%20por%20un%20proyecto."
+              class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Contacto</a>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div class="hero-visual reveal" style="transition-delay:200ms">
-          <div class="glass browser-card">
-            <div class="browser-window">
-              <div class="browser-bar" aria-hidden="true">
-                <span></span><span></span><span></span>
-                <div class="addr"></div>
-              </div>
-              <svg viewBox="0 0 560 400" role="img"
-                aria-label="Vista previa de una interfaz web moderna con secciones de encabezado, contenido y botón de acción">
-                <rect width="560" height="400" fill="none" />
-                <rect x="24" y="24" width="180" height="16" rx="4" fill="var(--secondary)" />
-                <rect x="24" y="60" width="320" height="28" rx="6"
-                  fill="color-mix(in oklch, var(--foreground) 85%, transparent)" />
-                <rect x="24" y="98" width="260" height="12" rx="3" fill="var(--muted-foreground)" opacity="0.6" />
-                <rect x="24" y="118" width="200" height="12" rx="3" fill="var(--muted-foreground)" opacity="0.6" />
-                <rect x="24" y="148" width="140" height="36" rx="999" fill="var(--primary)" />
-                <rect x="320" y="40" width="216" height="160" rx="14" fill="var(--secondary)" />
-                <rect x="24" y="220" width="150" height="120" rx="12" fill="var(--card)" stroke="var(--border)" />
-                <rect x="190" y="220" width="150" height="120" rx="12" fill="var(--card)" stroke="var(--border)" />
-                <rect x="356" y="220" width="180" height="120" rx="12" fill="var(--card)" stroke="var(--border)" />
-                <rect x="40" y="240" width="30" height="30" rx="8"
-                  fill="color-mix(in oklch, var(--primary) 20%, transparent)" />
-                <rect x="206" y="240" width="30" height="30" rx="8"
-                  fill="color-mix(in oklch, var(--primary) 20%, transparent)" />
-                <rect x="372" y="240" width="30" height="30" rx="8"
-                  fill="color-mix(in oklch, var(--primary) 20%, transparent)" />
-                <rect x="40" y="284" width="110" height="9" rx="2" fill="var(--muted-foreground)" opacity="0.5" />
-                <rect x="206" y="284" width="110" height="9" rx="2" fill="var(--muted-foreground)" opacity="0.5" />
-                <rect x="372" y="284" width="140" height="9" rx="2" fill="var(--muted-foreground)" opacity="0.5" />
-              </svg>
+    <!-- ============ COTIZACIÓN (teaser) ============ -->
+    <section class="alt" id="cotizacion" aria-labelledby="cotizacion-h">
+      <div class="container">
+        <div class="quote-teaser-inner">
+          <div class="reveal">
+            <span class="kicker">Cotización</span>
+            <h2 id="cotizacion-h">¿Ya sabés qué necesitás? Arrancá por acá.</h2>
+            <p>Contanos tu proyecto en 5 pasos rápidos. No calculamos precios en el momento: con tus respuestas
+              preparamos una propuesta a medida y te respondemos dentro de las 24-48hs hábiles. Sin compromiso.</p>
+            <div class="quote-teaser-steps" aria-hidden="true">
+              <span>01 · Qué necesitás</span>
+              <span>02 · Tu proyecto</span>
+              <span>03 · Funcionalidades</span>
+              <span>04 · Plazos</span>
+              <span>05 · Contacto</span>
+            </div>
+          </div>
+          <div class="reveal" style="transition-delay:100ms">
+            <div class="quote-teaser-actions">
+              <a href="cotizar.html" class="btn btn-primary">
+                Cotizar mi proyecto
+                <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </a>
+              <a href="#solucion" class="btn btn-outline">Ver qué resolvemos</a>
             </div>
           </div>
         </div>
@@ -1366,120 +1233,68 @@
     <section id="problema" aria-labelledby="problema-h">
       <div class="container">
         <div class="section-head reveal">
+          <span class="kicker">El punto de partida</span>
           <h2 id="problema-h">¿Tu sitio web realmente está trabajando para vos?</h2>
           <p>Muchas empresas invierten en tener una página web, pero pocas consiguen resultados reales.</p>
         </div>
 
         <div class="problem-list">
-          <div class="glass problem-item reveal">
-            <span class="ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
-                <circle cx="12" cy="12" r="9" />
-                <line x1="12" y1="8" x2="12" y2="13" />
-                <line x1="12" y1="16" x2="12.01" y2="16" />
-              </svg>
-            </span>
+          <div class="problem-item reveal">
+            <span class="num" aria-hidden="true">01</span>
             <p>Tu sitio recibe visitas, pero casi nadie se comunica o solicita información.</p>
           </div>
-          <div class="glass problem-item reveal" style="transition-delay:80ms">
-            <span class="ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
-                <circle cx="12" cy="12" r="9" />
-                <line x1="12" y1="8" x2="12" y2="13" />
-                <line x1="12" y1="16" x2="12.01" y2="16" />
-              </svg>
-            </span>
+          <div class="problem-item reveal" style="transition-delay:80ms">
+            <span class="num" aria-hidden="true">02</span>
             <p>La web luce desactualizada, carga lento o no transmite confianza.</p>
           </div>
-          <div class="glass problem-item reveal" style="transition-delay:160ms">
-            <span class="ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
-                <circle cx="12" cy="12" r="9" />
-                <line x1="12" y1="8" x2="12" y2="13" />
-                <line x1="12" y1="16" x2="12.01" y2="16" />
-              </svg>
-            </span>
+          <div class="problem-item reveal" style="transition-delay:160ms">
+            <span class="num" aria-hidden="true">03</span>
             <p>Cada cambio depende de terceros y el mantenimiento se vuelve un problema constante.</p>
           </div>
         </div>
 
-        <p class="problem-note reveal">Una página web debe ser una herramienta comercial que acompañe el crecimiento de
-          tu negocio, no un gasto que simplemente existe.</p>
+        <p class="problem-note reveal">Una página web debe ser una herramienta comercial que acompañe el crecimiento
+          de tu negocio, no un gasto que simplemente existe.</p>
       </div>
     </section>
 
     <!-- ============ SOLUTION ============ -->
-    <section id="solucion" aria-labelledby="solucion-h">
+    <section class="alt" id="solucion" aria-labelledby="solucion-h">
       <div class="container">
-        <div class="section-head center reveal">
+        <div class="section-head asym reveal">
           <span class="kicker">La solución</span>
-          <h2 id="solucion-h" style="margin-top:.5rem">Una solución web para cada necesidad</h2>
+          <h2 id="solucion-h">Una solución web para cada necesidad</h2>
           <p>Trabajamos cuatro frentes según lo que necesite tu proyecto: desde un sitio nuevo hasta un sistema a
             medida.</p>
         </div>
 
         <div class="cards-grid">
-          <article class="glass card reveal">
-            <span class="ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
-                <rect x="3" y="4" width="18" height="16" rx="2" />
-                <line x1="3" y1="9" x2="21" y2="9" />
-                <line x1="8" y1="4" x2="8" y2="9" />
-              </svg>
-            </span>
+          <article class="card reveal">
+            <span class="num" aria-hidden="true">01</span>
             <h3>Sitios web y landing pages</h3>
             <p>Sitios institucionales, catálogos y landing pages con un objetivo claro: que el visitante entienda qué
               ofrecés y sepa cómo contactarte.</p>
           </article>
 
-          <article class="glass card reveal" style="transition-delay:100ms">
-            <span class="ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
-                <line x1="4" y1="21" x2="4" y2="14" />
-                <line x1="4" y1="10" x2="4" y2="3" />
-                <line x1="12" y1="21" x2="12" y2="12" />
-                <line x1="12" y1="8" x2="12" y2="3" />
-                <line x1="20" y1="21" x2="20" y2="16" />
-                <line x1="20" y1="12" x2="20" y2="3" />
-                <line x1="1" y1="14" x2="7" y2="14" />
-                <line x1="9" y1="8" x2="15" y2="8" />
-                <line x1="17" y1="16" x2="23" y2="16" />
-              </svg>
-            </span>
+          <article class="card reveal" style="transition-delay:80ms">
+            <span class="num" aria-hidden="true">02</span>
             <h3>Herramientas y sistemas web a medida</h3>
             <p>Turnos y reservas, gestión interna, paneles de administración, formularios con lógica. Software web
               pensado para tu forma de trabajar.</p>
           </article>
 
-          <article class="glass card reveal" style="transition-delay:200ms">
-            <span class="ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
-                <polyline points="23 4 23 10 17 10" />
-                <polyline points="1 20 1 14 7 14" />
-                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
-              </svg>
-            </span>
+          <article class="card reveal" style="transition-delay:160ms">
+            <span class="num" aria-hidden="true">03</span>
             <h3>Rediseño y optimización</h3>
-            <p>Modernizamos sitios existentes: mejor diseño, más velocidad y una estructura que acompañe tus objetivos
-              actuales.</p>
+            <p>Modernizamos sitios existentes: mejor diseño, más velocidad y una estructura que acompañe tus
+              objetivos actuales.</p>
           </article>
 
-          <article class="glass card reveal" style="transition-delay:300ms">
-            <span class="ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
-                <polyline points="9 12 11 14 15 10" />
-              </svg>
-            </span>
+          <article class="card reveal" style="transition-delay:240ms">
+            <span class="num" aria-hidden="true">04</span>
             <h3>Mantenimiento y soporte</h3>
-            <p>Nos ocupamos de que tu sitio siga seguro, actualizado y funcionando, con planes de soporte continuos.</p>
+            <p>Nos ocupamos de que tu sitio siga seguro, actualizado y funcionando, con planes de soporte continuos.
+            </p>
           </article>
         </div>
       </div>
@@ -1488,52 +1303,27 @@
     <!-- ============ HOW WE WORK ============ -->
     <section id="proceso" aria-labelledby="proceso-h">
       <div class="container">
-        <div class="section-head center reveal">
+        <div class="section-head asym reveal">
           <span class="kicker">¿Cómo trabajamos?</span>
-          <h2 id="proceso-h" style="margin-top:.5rem">Un proceso claro, de principio a fin</h2>
+          <h2 id="proceso-h">Un proceso claro, de principio a fin</h2>
+          <p>Sin sorpresas: tres etapas, cada una con un entregable concreto.</p>
         </div>
 
         <div class="process-grid">
-          <div class="process-line" aria-hidden="true"></div>
-
           <div class="process-step reveal">
-            <div class="num" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
-                <circle cx="11" cy="11" r="7" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-              </svg>
-            </div>
-            <span class="step-index">01</span>
+            <span class="num" aria-hidden="true">01</span>
             <h3>Analizamos tu proyecto</h3>
             <p>Conocemos tu negocio, tus objetivos y el perfil de tus clientes.</p>
           </div>
 
-          <div class="process-step reveal" style="transition-delay:120ms">
-            <div class="num" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M12 20h9" />
-                <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
-              </svg>
-            </div>
-            <span class="step-index">02</span>
+          <div class="process-step reveal" style="transition-delay:100ms">
+            <span class="num" aria-hidden="true">02</span>
             <h3>Diseñamos y desarrollamos</h3>
             <p>Construimos una solución web personalizada, optimizada para todos los dispositivos.</p>
           </div>
 
-          <div class="process-step reveal" style="transition-delay:240ms">
-            <div class="num" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
-                <path
-                  d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
-                <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
-                <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
-              </svg>
-            </div>
-            <span class="step-index">03</span>
+          <div class="process-step reveal" style="transition-delay:200ms">
+            <span class="num" aria-hidden="true">03</span>
             <h3>Publicamos y acompañamos</h3>
             <p>Ponemos tu sitio online y seguimos brindando soporte, mejoras y mantenimiento cuando lo necesites.</p>
           </div>
@@ -1541,108 +1331,62 @@
       </div>
     </section>
 
-    <!-- ============ TESTIMONIALS ============ -->
-    <section id="testimonios" aria-labelledby="testimonios-h">
+    <!-- ============ EVIDENCIA (trabajo entregado) ============ -->
+    <section class="alt" id="testimonios" aria-labelledby="testimonios-h">
       <div class="container">
-        <div class="section-head center reveal">
-          <h2 id="testimonios-h">Lo que dicen nuestros clientes</h2>
+        <div class="section-head reveal">
+          <span class="kicker">Trabajo entregado</span>
+          <h2 id="testimonios-h">Proyectos en producción, no mockups</h2>
         </div>
-        <p class="testi-hint reveal">Presioná una tarjeta para visitar la página web del cliente</p>
 
-        <div class="testi-grid">
-          <figure class="glass testi-card reveal">
-            <div class="stars" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
-              </svg>
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
-              </svg>
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
-              </svg>
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
-              </svg>
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
-              </svg>
+        <div class="evidence-list">
+          <article class="evidence-item reveal">
+            <div class="evidence-media">
+              <!-- Reemplazar por <img src="assets/proyectos/colonia-michis.png" alt="Captura del sitio de Colonia Michis" width="960" height="600" loading="lazy"> cuando esté la captura real -->
+              <span>Captura pendiente</span>
             </div>
-            <blockquote>"Necesitábamos una landing para mostrar nuestros servicios a los donadores. En pocos dias
-              empezamos a recaudar más fondos y el proceso fue claro desde el primer día."</blockquote>
-            <figcaption class="testi-foot">
-              <span class="avatar" aria-hidden="true">NC</span>
-              <div>
-                <div class="testi-name">Noara Sandoval</div>
-                <div class="testi-role">Colonia Michis</div>
+            <div class="evidence-body">
+              <blockquote>"Necesitábamos una landing para mostrar nuestros servicios a los donadores. En pocos días
+                empezamos a recaudar más fondos y el proceso fue claro desde el primer día."</blockquote>
+              <div class="evidence-foot">
+                <h3 class="evidence-client">Colonia Michis — Refugio de animales</h3>
+                <a class="evidence-link" href="https://justin-baltasar.github.io/colonia-michis/" target="_blank"
+                  rel="noopener noreferrer">Visitar sitio ↗</a>
               </div>
-            </figcaption>
-            <a class="card-link" href="https://justin-baltasar.github.io/colonia-michis/" target="_blank"
-              rel="noopener noreferrer" aria-label="Visitar el sitio web de Colonia Michis"></a>
-          </figure>
+            </div>
+          </article>
 
-          <figure class="glass testi-card reveal">
-            <div class="stars" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
-              </svg>
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
-              </svg>
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
-              </svg>
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
-              </svg>
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
-              </svg>
+          <article class="evidence-item reveal" style="transition-delay:80ms">
+            <div class="evidence-media">
+              <!-- Reemplazar por <img src="assets/proyectos/lp-slots.png" alt="Captura del sitio de LP Slots" width="960" height="600" loading="lazy"> cuando esté la captura real -->
+              <span>Captura pendiente</span>
             </div>
-            <blockquote>"Precisaba una pagina para ofrecer mis servicios a los sponsors. Gracias a ella
-              mejore mi marca personal y pude maximizar mis precios."</blockquote>
-            <figcaption class="testi-foot">
-              <span class="avatar" aria-hidden="true">NC</span>
-              <div>
-                <div class="testi-name">Luis Picasso</div>
-                <div class="testi-role">LP slots</div>
+            <div class="evidence-body">
+              <blockquote>"Precisaba una página para ofrecer mis servicios a los sponsors. Gracias a ella mejoré mi
+                marca personal y pude maximizar mis precios."</blockquote>
+              <div class="evidence-foot">
+                <h3 class="evidence-client">LP Slots — Marca personal</h3>
+                <a class="evidence-link" href="https://justin-baltasar.github.io/lp-slots/" target="_blank"
+                  rel="noopener noreferrer">Visitar sitio ↗</a>
               </div>
-            </figcaption>
-            <a class="card-link" href="https://justin-baltasar.github.io/lp-slots/" target="_blank"
-              rel="noopener noreferrer" aria-label="Visitar el sitio web de LP slots"></a>
-          </figure>
+            </div>
+          </article>
 
-          <figure class="glass testi-card reveal" style="transition-delay:100ms">
-            <div class="stars" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
-              </svg>
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
-              </svg>
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
-              </svg>
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
-              </svg>
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
-              </svg>
+          <article class="evidence-item reveal" style="transition-delay:160ms">
+            <div class="evidence-media">
+              <!-- Reemplazar por <img src="assets/proyectos/jit-arquitectura.png" alt="Captura del sitio de JIT Arquitectura" width="960" height="600" loading="lazy"> cuando esté la captura real -->
+              <span>Captura pendiente</span>
             </div>
-            <blockquote>"Crearon completamente nuestra primera página web. Ahora transmitimos una imagen mucho más
-              profesional y
-              atraemos mas clientes."</blockquote>
-            <figcaption class="testi-foot">
-              <span class="avatar" aria-hidden="true">TS</span>
-              <div>
-                <div class="testi-name">Tobias Sanchez</div>
-                <div class="testi-role">JIT Arquitectura</div>
+            <div class="evidence-body">
+              <blockquote>"Crearon completamente nuestra primera página web. Ahora transmitimos una imagen mucho más
+                profesional y atraemos más clientes."</blockquote>
+              <div class="evidence-foot">
+                <h3 class="evidence-client">JIT Arquitectura — Estudio de arquitectura</h3>
+                <a class="evidence-link" href="https://justin-baltasar.github.io/jit-arquitectura/" target="_blank"
+                  rel="noopener noreferrer">Visitar sitio ↗</a>
               </div>
-            </figcaption>
-            <a class="card-link" href="https://justin-baltasar.github.io/jit-arquitectura/" target="_blank"
-              rel="noopener noreferrer" aria-label="Visitar el sitio web de JIT Arquitectura"></a>
-          </figure>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -1651,13 +1395,14 @@
     <section id="faq" aria-labelledby="faq-h">
       <div class="container">
         <div class="section-head center reveal">
-          <h2 id="faq-h">Preguntas frecuentes</h2>
+          <span class="kicker">Preguntas frecuentes</span>
+          <h2 id="faq-h">Antes de escribirnos</h2>
         </div>
 
         <div class="faq-list reveal">
-          <div class="glass faq-item" aria-expanded="false">
+          <div class="faq-item">
             <h3>
-              <button class="faq-q" type="button">
+              <button class="faq-q" type="button" aria-expanded="false">
                 <span>¿Cuánto demora el desarrollo?</span>
                 <svg class="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                   stroke-linecap="round">
@@ -1675,9 +1420,9 @@
             </div>
           </div>
 
-          <div class="glass faq-item" aria-expanded="false">
+          <div class="faq-item">
             <h3>
-              <button class="faq-q" type="button">
+              <button class="faq-q" type="button" aria-expanded="false">
                 <span>¿Hacen solo páginas o también sistemas web?</span>
                 <svg class="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                   stroke-linecap="round">
@@ -1688,16 +1433,16 @@
             </h3>
             <div class="faq-a">
               <div class="faq-a-inner">
-                <p>Las dos cosas. Además de sitios y landing pages, desarrollamos herramientas y sistemas web a medida:
-                  turnos y reservas, paneles de administración, gestión interna, formularios con lógica. Si tu proyecto
-                  necesita funcionalidad y no solo presencia, podemos encararlo.</p>
+                <p>Las dos cosas. Además de sitios y landing pages, desarrollamos herramientas y sistemas web a
+                  medida: turnos y reservas, paneles de administración, gestión interna, formularios con lógica. Si
+                  tu proyecto necesita funcionalidad y no solo presencia, podemos encararlo.</p>
               </div>
             </div>
           </div>
 
-          <div class="glass faq-item" aria-expanded="false">
+          <div class="faq-item">
             <h3>
-              <button class="faq-q" type="button">
+              <button class="faq-q" type="button" aria-expanded="false">
                 <span>¿Pueden integrarlo con herramientas que ya uso?</span>
                 <svg class="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                   stroke-linecap="round">
@@ -1708,16 +1453,16 @@
             </h3>
             <div class="faq-a">
               <div class="faq-a-inner">
-                <p>En general sí. Trabajamos con integraciones a servicios de terceros (calendarios, planillas, medios de
-                  pago, CRMs, sistemas de facturación, entre otros) siempre que ofrezcan una forma de conexión. Lo
-                  revisamos en la etapa de análisis para confirmar el alcance.</p>
+                <p>En general sí. Trabajamos con integraciones a servicios de terceros (calendarios, planillas,
+                  medios de pago, CRMs, sistemas de facturación, entre otros) siempre que ofrezcan una forma de
+                  conexión. Lo revisamos en la etapa de análisis para confirmar el alcance.</p>
               </div>
             </div>
           </div>
 
-          <div class="glass faq-item" aria-expanded="false">
+          <div class="faq-item">
             <h3>
-              <button class="faq-q" type="button">
+              <button class="faq-q" type="button" aria-expanded="false">
                 <span>¿El sitio funciona en celulares y tablets?</span>
                 <svg class="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                   stroke-linecap="round">
@@ -1734,9 +1479,9 @@
             </div>
           </div>
 
-          <div class="glass faq-item" aria-expanded="false">
+          <div class="faq-item">
             <h3>
-              <button class="faq-q" type="button">
+              <button class="faq-q" type="button" aria-expanded="false">
                 <span>¿Pueden actualizar un sitio existente?</span>
                 <svg class="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                   stroke-linecap="round">
@@ -1753,9 +1498,9 @@
             </div>
           </div>
 
-          <div class="glass faq-item" aria-expanded="false">
+          <div class="faq-item">
             <h3>
-              <button class="faq-q" type="button">
+              <button class="faq-q" type="button" aria-expanded="false">
                 <span>¿Incluyen mantenimiento después de la entrega?</span>
                 <svg class="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                   stroke-linecap="round">
@@ -1766,15 +1511,15 @@
             </h3>
             <div class="faq-a">
               <div class="faq-a-inner">
-                <p>Ofrecemos planes de mantenimiento y soporte para mantener el sitio actualizado, seguro y funcionando
-                  correctamente.</p>
+                <p>Ofrecemos planes de mantenimiento y soporte para mantener el sitio actualizado, seguro y
+                  funcionando correctamente.</p>
               </div>
             </div>
           </div>
 
-          <div class="glass faq-item" aria-expanded="false">
+          <div class="faq-item">
             <h3>
-              <button class="faq-q" type="button">
+              <button class="faq-q" type="button" aria-expanded="false">
                 <span>¿Trabajan con empresas y profesionales independientes?</span>
                 <svg class="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                   stroke-linecap="round">
@@ -1794,40 +1539,17 @@
       </div>
     </section>
 
-    <!-- ============ FINAL CTA ============ -->
-    <section id="final-cta">
-      <div class="container">
-        <div class="glass final-cta-panel reveal">
-          <div class="glow" aria-hidden="true"><span></span></div>
-          <h2>Tu próximo cliente puede estar buscando tus servicios ahora mismo.</h2>
-          <p>Cada día sin una presencia digital profesional es una oportunidad que puede terminar en la competencia.
-            Solicitá una consulta y conversemos sobre la mejor solución para tu proyecto. Sin compromiso.</p>
-          <div class="final-cta-actions">
-            <a href="cotizar.html" class="btn btn-primary">
-              Cotizar mi proyecto
-              <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
-            </a>
-            <a href="#contacto" class="btn btn-outline">Solicitar una consulta rápida</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ============ CONTACT ============ -->
-    <section id="contacto" aria-labelledby="contacto-h">
+    <section class="alt" id="contacto" aria-labelledby="contacto-h">
       <div class="container">
         <div class="section-head center reveal">
           <span class="kicker">Contacto</span>
-          <h2 id="contacto-h" style="margin-top:.5rem">Solicitá tu consulta gratuita</h2>
+          <h2 id="contacto-h">Solicitá tu consulta gratuita</h2>
           <p>Contanos brevemente sobre tu proyecto y te respondemos a la brevedad, sin compromiso.</p>
         </div>
 
         <div class="contact-wrap">
-          <form class="glass form-card reveal" id="contactForm" action="https://formspree.io/f/maqrzekp" method="POST"
+          <form class="form-card reveal" id="contactForm" action="https://formspree.io/f/maqrzekp" method="POST"
             novalidate>
             <div class="field">
               <label for="name">Nombre completo</label>
@@ -1839,7 +1561,7 @@
             </div>
             <div class="field">
               <label for="company">Empresa o marca <span
-                  style="font-weight:400; color:var(--muted-foreground)">(opcional)</span></label>
+                  style="font-weight:400; color:var(--text-secondary)">(opcional)</span></label>
               <input type="text" id="company" name="company" autocomplete="organization">
             </div>
             <div class="field">
@@ -1857,8 +1579,7 @@
             </button>
 
             <p class="form-note">Respondemos dentro de las 24-48hs hábiles. Al enviar este formulario aceptás nuestra
-              <a href="privacidad.html" style="color:var(--primary); text-decoration:underline;">política de
-                privacidad</a>.
+              <a href="privacidad.html">política de privacidad</a>.
             </p>
             <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
           </form>
@@ -1870,12 +1591,19 @@
 
   <footer>
     <div class="container footer-row">
-      <a href="#top" class="brand">JBC</a>
+      <a href="#top" class="brand logo">
+        <svg viewBox="0 0 439.53 100" role="img" aria-label="Estudio JBC">
+          <path fill="currentColor" fill-rule="evenodd"
+            d="M 104.12,0.26 C 103.84,0.47 103.83,1.55 103.84,30.32 C 103.84,62.37 103.88,61.56 103.03,64.85 C 101.83,69.68 98.29,74.69 94.2,77.44 C 92.77,78.39 88.48,80.39 87.87,80.39 C 87.66,80.39 87.33,80.48 87.13,80.59 C 86.93,80.69 86.35,80.87 85.86,80.99 C 85.36,81.11 84.65,81.27 84.28,81.37 C 80.28,82.36 79.75,82.38 38.69,82.38 C 12.81,82.38 0.59,82.43 0.36,82.54 C 0.05,82.73-0.15,98.23 0.15,99.36 C 0.33,100.02 0.33,100.02 39.98,99.97 C 89.62,99.89 86.3,100.12 96.85,96.27 C 107.89,92.27 117.63,82.13 120.77,71.38 C 123.09,63.42 122.92,66.56 123.01,30.98 C 123.07,2.51 123.05,0.65 122.79,0.36 C 122.43,-0.06 104.69,-0.14 104.12,0.26 M 157.11,0.37 C 156.62,0.87 156.6,98.98 157.08,99.57 L 157.39,99.95 L 207.31,99.92 C 259.98,99.89 260.13,99.89 263.01,99.14 C 263.55,99.01 264.6,98.75 265.32,98.56 C 276.5,95.69 284.92,87.02 286.73,76.51 C 286.83,75.86 287.03,74.84 287.16,74.21 C 287.78,71.2 286.95,64.57 285.64,62.08 C 285.51,61.83 285.41,61.53 285.41,61.41 C 285.41,61.1 284.01,58.34 283.3,57.25 C 281.38,54.32 279.28,52.21 276.37,50.25 C 274.38,48.93 274.3,48.72 275.49,48.02 C 281.01,44.86 285.69,34.98 285.49,26.91 C 285.1,12 274.33,1.76 257.39,0.21 C 253.3,-0.16 157.49,-0.01 157.11,0.37 M 256.41,17.92 C 261.45,18.89 265.65,22.26 266.33,25.92 C 266.4,26.28 266.55,26.81 266.68,27.11 C 266.96,27.8 266.96,29.52 266.66,30.56 C 266.53,31.01 266.38,31.7 266.33,32.12 C 266.18,33.11 264.88,35.56 263.89,36.65 C 261.9,38.88 259.57,40 255.49,40.73 C 253.32,41.11 177.04,41.18 176.51,40.8 C 176.13,40.52 176.19,18.06 176.57,17.77 C 177.14,17.35 254.21,17.49 256.41,17.92 M 257.39,58.49 C 264.6,59.5 269.97,66.75 267.89,72.67 C 267.7,73.19 267.56,73.73 267.56,73.9 C 267.56,74.05 267.21,74.87 266.78,75.73 C 265.27,78.72 262.74,80.64 258.79,81.83 L 257.22,82.3 L 216.96,82.33 C 194.83,82.36 176.61,82.31 176.49,82.25 C 176.23,82.06 176.19,59.07 176.47,58.55 C 176.62,58.24 177.52,58.24 214.95,58.19 C 255.87,58.16 254.89,58.14 257.39,58.49 M 356.24,0.29 C 354.79,0.39 353.5,0.54 353.4,0.61 C 353.3,0.65 352.39,0.82 351.38,0.95 C 350.37,1.08 349.43,1.27 349.26,1.35 C 349.11,1.43 348.65,1.55 348.24,1.61 C 346.9,1.83 342.9,3.07 340.14,4.13 C 338.71,4.66 334.18,6.89 333.03,7.62 C 322.91,13.96 316.59,21.67 312.69,32.45 C 311.53,35.67 310.28,41.31 310.05,44.43 C 309.86,46.68 309.86,54.87 310.05,56.5 C 310.33,59.3 311.57,65.22 312.11,66.42 C 312.48,67.22 313.19,69.09 313.19,69.22 C 313.19,69.3 313.29,69.58 313.42,69.86 C 314.3,71.85 314.51,72.34 314.51,72.46 C 314.51,72.89 317.34,77.57 319.16,80.15 C 324.86,88.25 334.15,94.68 344.52,97.67 C 352.83,100.07 351.96,100.04 399.85,99.99 C 431.42,99.97 439.04,99.92 439.25,99.74 C 439.58,99.46 439.63,82.91 439.3,82.58 C 439.15,82.43 430.03,82.38 399.34,82.36 C 377.45,82.36 358.97,82.3 358.24,82.21 C 351.89,81.55 346.45,79.7 341.76,76.58 C 335.85,72.66 330.58,64.85 329.65,58.65 C 329.59,58.29 329.44,57.55 329.32,57 C 328.18,52.12 328.68,44.57 330.46,39.14 C 333.95,28.58 342.25,21.3 353.86,18.64 C 358.39,17.6 354.92,17.68 399.06,17.62 C 427.94,17.58 439.12,17.52 439.29,17.39 C 439.57,17.14 439.62,0.89 439.34,0.36 C 439.12,-0.02 361.48,-0.11 356.24,0.29" />
+        </svg>
+      </a>
       <nav class="footer-links" aria-label="Enlaces del pie de página">
         <a href="#solucion">Soluciones</a>
         <a href="#proceso">Proceso</a>
         <a href="#faq">FAQ</a>
         <a href="#contacto">Contacto</a>
+        <a href="privacidad.html">Privacidad</a>
+        <a href="terminos.html">Términos</a>
       </nav>
       <span class="footer-copy" id="footerYear"></span>
     </div>
@@ -1885,23 +1613,8 @@
     (function () {
       "use strict";
 
-      document.body.classList.add('is-loading');
-      var pageLoader = document.getElementById('pageLoader');
-      var loaderStart = Date.now();
-      var minDisplay = 1400; // ms mínimo en pantalla, para que no sea un flash
-
-      window.addEventListener('load', function () {
-        var elapsed = Date.now() - loaderStart;
-        var wait = Math.max(0, minDisplay - elapsed);
-        setTimeout(function () {
-          pageLoader.classList.add('hidden');
-          document.body.classList.remove('is-loading');
-          setTimeout(function () { pageLoader.remove(); }, 650);
-        }, wait);
-      });
-
       /* ---- current year ---- */
-      document.getElementById('footerYear').textContent = '© ' + new Date().getFullYear() + ' JBC. Todos los derechos reservados.';
+      document.getElementById('footerYear').textContent = '© ' + new Date().getFullYear() + ' Estudio JBC. Todos los derechos reservados.';
 
       /* ---- header shrink on scroll ---- */
       var header = document.getElementById('siteHeader');
@@ -1951,8 +1664,8 @@
       document.querySelectorAll('.faq-item').forEach(function (item) {
         var btn = item.querySelector('.faq-q');
         btn.addEventListener('click', function () {
-          var isOpen = item.getAttribute('aria-expanded') === 'true';
-          item.setAttribute('aria-expanded', String(!isOpen));
+          var isOpen = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', String(!isOpen));
         });
       });
 
@@ -1968,7 +1681,7 @@
         var required = form.querySelectorAll('[required]');
         var valid = true;
         required.forEach(function (field) {
-          if (!field.value.trim()) { valid = false; field.style.borderColor = 'oklch(0.62 0.22 25)'; }
+          if (!field.value.trim()) { valid = false; field.style.borderColor = 'var(--danger)'; }
           else { field.style.borderColor = ''; }
         });
         if (!valid) {
