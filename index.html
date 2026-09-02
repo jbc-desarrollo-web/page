@@ -239,6 +239,10 @@
         transition: none !important;
       }
 
+      .evidence-media img {
+        transition: none;
+      }
+
       html {
         scroll-behavior: auto;
       }
@@ -857,14 +861,21 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      filter: grayscale(1);
+      opacity: .85;
+      transition: filter .45s ease, opacity .45s ease;
     }
 
-    .evidence-media span {
-      font-family: var(--font-mono);
-      font-size: .75rem;
-      text-transform: uppercase;
-      letter-spacing: .1em;
-      color: var(--navy-500);
+    /* LP Slots es una captura muy oscura: gris puro la volvería un rectángulo negro */
+    .evidence-media img[src*="lp-slots"] {
+      filter: grayscale(.85) brightness(1.15);
+    }
+
+    .evidence-item:hover .evidence-media img,
+    .evidence-item:focus-within .evidence-media img,
+    .evidence-item.is-active .evidence-media img {
+      filter: grayscale(0);
+      opacity: 1;
     }
 
     .evidence-body blockquote {
@@ -1172,7 +1183,7 @@
             sistemas y sitios web.</h1>
 
           <p class="mono-label entry-meta reveal" style="transition-delay:120ms">Corrientes &amp; Chaco — Diseño
-            &amp; desarrollo web</p>
+            &amp; desarrollo</p>
 
           <p class="entry-proof reveal" style="transition-delay:160ms">
             <span>+3 años programando</span>
@@ -1658,6 +1669,16 @@
         revealEls.forEach(function (el) { observer.observe(el); });
       } else {
         revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+      }
+
+      /* ---- capturas: gris salvo la tarjeta centrada (solo touch, no hay hover) ---- */
+      if (window.matchMedia('(hover: none)').matches && 'IntersectionObserver' in window) {
+        var mediaObs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            entry.target.classList.toggle('is-active', entry.isIntersecting);
+          });
+        }, { threshold: 0.6 });
+        document.querySelectorAll('.evidence-item').forEach(function (el) { mediaObs.observe(el); });
       }
 
       /* ---- FAQ accordion ---- */
